@@ -4,7 +4,8 @@ URL: [lunchtime.azurewebsites.net](http://lunchtime.azurewebsites.net/)
 
 Simple web application for displaying lunch menus from local restaurants. 
 It is used as dashboard for choosing place for lunch by me and my collegues. 
-In current state it displays menus and links to restaurants in city center of Brno, Czech Republic 
+It displays menus and links to restaurants only in city centre of Brno (Czech Republic) in current state  
+
 
 ## Features
 - download menus from predefined restaurants
