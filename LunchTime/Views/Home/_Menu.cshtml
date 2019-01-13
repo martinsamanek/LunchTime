@@ -1,0 +1,28 @@
+﻿@using System.Globalization
+@model LunchTime.Models.LunchMenu
+
+<div class="col-md-4">
+    <h2>
+        <a href="@Model.Url" target="_blank">@Model.RestaurantName</a>
+    </h2>
+    @{
+        var menu = Model.DailyMenus.OrderBy(x => x.Date).FirstOrDefault(m => m.Date.Date >= DateTime.Now.Date);
+        if (menu != null) {
+            <h4>@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(menu.Date.DayOfWeek) (@menu.Date.ToShortDateString())</h4>
+            <ul>
+                @foreach (var soup in menu.Soups)
+                {
+                    <li>@soup.Name.Replace("&nbsp;", " ").Replace("&amp;", "&")</li>
+                }
+            </ul>
+
+            <ol>
+                @foreach (var meal in menu.Meals)
+                {
+                    <li>@meal.Name.Replace("&nbsp;", " ").Replace("&amp;", "&") @meal.Price</li>
+                }
+            </ol>
+        }
+        
+    }
+</div>
