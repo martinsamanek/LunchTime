@@ -18,3 +18,5 @@ It displays menus and links to restaurants only in city centre of Brno (Czech Re
 First version of this application was written during one long boring meeting. 
 Later was improved in free time and pushed to private TFS repository. 
 It was improved and extended by couple of my collegues (Jakub Hranac, Pavel Bartos and Roman Dvorsky). 
+
+Contribute!
