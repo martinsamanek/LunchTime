@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Brno";
+    var columnSize = 4;
+    var itemsPerColumn = 12 / columnSize;
+}
+
+<h2>Brno</h2>
+
+@using LunchTime.Restaurants
+@model LunchTime.Models.LunchMenus
+
+
+@for (var c = 0; c < Model.Menus.Count; c = c + itemsPerColumn)
+{
+    <div class="row">
+        @{for (var m = 0; m < itemsPerColumn && m + c < Model.Menus.Count; m++)
+            {
+                Html.RenderPartial("_Menu", Model.Menus[m + c]);
+            }}
+    </div>
+}
+
+@for (var c = 0; c < Model.ToDoRestaurants.Count; c = c + itemsPerColumn)
+{
+    <div class="row">
+        @{
+            for (var m = 0; m < itemsPerColumn && m + c < Model.ToDoRestaurants.Count; m++)
+            {
+                <div class="col-md-4">
+                    <h2>
+                        <a href="@Model.ToDoRestaurants[m + c].Url" target="_blank">@Model.ToDoRestaurants[m + c].Name</a>
+                        @{
+                            if (!string.IsNullOrEmpty(Model.ToDoRestaurants[m + c].Web))
+                            {
+                                <a href="@Model.ToDoRestaurants[m + c].Web" target="_blank"> (web)</a>
+                            }
+                        }
+                    </h2>
+                </div>
+            }
+        }
+    </div>
+}

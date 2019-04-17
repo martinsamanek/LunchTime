@@ -43,7 +43,7 @@ namespace LunchTime.Restaurants
 
         private readonly object _lock = new object();
 
-        private static IList<T> GetInstances<T>()
+        protected static IList<T> GetInstances<T>()
         {
             return 
                 Assembly.GetExecutingAssembly().GetTypes()
@@ -56,7 +56,7 @@ namespace LunchTime.Restaurants
                 .ToList();
         }
 
-        private static IList<LunchMenu> CreateMenus(out IList<RestaurantBase> todoRestaurants)
+        protected virtual IList<LunchMenu> CreateMenus(out IList<RestaurantBase> todoRestaurants)
         {
             var menus = new ConcurrentBag<LunchMenu>();
             var restaurants = new ConcurrentBag<RestaurantBase>();
@@ -70,7 +70,7 @@ namespace LunchTime.Restaurants
             return menus.ToList();
         }
 
-        private static void AddMenu(
+        protected static void AddMenu(
             ConcurrentBag<LunchMenu> menus
             , ConcurrentBag<RestaurantBase> todoRestaurants
             , RestaurantBase restaurant)
@@ -108,7 +108,7 @@ namespace LunchTime.Restaurants
                     _lastRefreshDate = DateTime.Today;
                     _menusCache = CreateMenus(out _todoRestaurants);
                 }
-            }
+            }            
         }
     }
 }

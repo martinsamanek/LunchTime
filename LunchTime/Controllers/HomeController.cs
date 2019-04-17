@@ -12,6 +12,8 @@ namespace LunchTime.Controllers
     public class HomeController : Controller
     {
         private static readonly MenusProvider MenusProvider = new MenusProvider();
+        private static readonly MenusProvider MenusOloProvider = new MenusOloProvider();
+        private static readonly MenusProvider MenusBrnoProvider = new MenusBrnoProvider();
 
         public ActionResult Index()
         {
@@ -19,6 +21,27 @@ namespace LunchTime.Controllers
             {
                 Menus = MenusProvider.GetMenus(),
                 ToDoRestaurants = MenusProvider.GetRestaurants()
+                
+            };
+            return View(model);
+        }
+
+        public ActionResult Olomouc()
+        {
+            var model = new LunchMenus
+            {
+                Menus = MenusOloProvider.GetMenus(),
+                ToDoRestaurants = MenusOloProvider.GetRestaurants()
+            };
+            return View(model);
+        }
+
+        public ActionResult Brno()
+        {
+            var model = new LunchMenus
+            {
+                Menus = MenusBrnoProvider.GetMenus(),
+                ToDoRestaurants = MenusBrnoProvider.GetRestaurants()               
             };
             return View(model);
         }

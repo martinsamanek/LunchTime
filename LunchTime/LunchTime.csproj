@@ -164,11 +164,17 @@
     </Compile>
     <Compile Include="Models\LunchMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Restaurants\MenuOlomoucBase.cs" />
     <Compile Include="Restaurants\MenuBrno\Charlies.cs" />
     <Compile Include="Restaurants\MenuBrno\Baroko.cs" />
     <Compile Include="Restaurants\MenuBrno\DaVinci.cs" />
     <Compile Include="Restaurants\MenuBrno\Spolek.cs" />
     <Compile Include="Restaurants\MenuBrno\Divadelni.cs" />
+    <Compile Include="Restaurants\MenusBrnoProvider.cs" />
+    <Compile Include="Restaurants\MenusOloProvider.cs" />
+    <Compile Include="Restaurants\Olomouc\Anca.cs" />
+    <Compile Include="Restaurants\Olomouc\Gol.cs" />
+    <Compile Include="Restaurants\Olomouc\Mexicana.cs" />
     <Compile Include="Restaurants\TODO\Gusto.cs" />
     <Compile Include="Restaurants\TODO\Parodie.cs" />
     <Compile Include="Restaurants\TODO\IndianBuddha.cs" />
@@ -234,6 +240,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Home\_Menu.cshtml" />
+    <Content Include="Views\Home\Olomouc.cshtml" />
+    <Content Include="Views\Home\Brno.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -258,6 +266,13 @@
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <Target Name="CopyRoslynFiles" AfterTargets="AfterBuild" Condition="!$(Disable_CopyWebApplication) And '$(OutDir)' != '$(OutputPath)'">
+    <ItemGroup>
+      <RoslynFiles Include="$(CscToolPath)\*" />
+    </ItemGroup>
+    <MakeDir Directories="$(WebProjectOutputDir)\bin\roslyn" />
+    <Copy SourceFiles="@(RoslynFiles)" DestinationFolder="$(WebProjectOutputDir)\bin\roslyn" SkipUnchangedFiles="true" Retries="$(CopyRetryCount)" RetryDelayMilliseconds="$(CopyRetryDelayMilliseconds)" />
   </Target>
   <ProjectExtensions>
     <VisualStudio>
