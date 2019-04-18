@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.bookmark-link {
+    width: 24px;
+    height: 24px;
+    content: url(star_white.png);
+}
+
+.bookmark-link.bookmarked {
+    content: url(star_yellow.png);
+}

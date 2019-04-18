@@ -1,17 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using LunchTime.Restaurants;
 
 namespace LunchTime.Models
 {
     public class LunchMenu
     {
-        public LunchMenu(string restaurantName, string restaurantUrl, string web)
+        public LunchMenu(int id, string restaurantName, string restaurantUrl, string web, IList<DailyMenu> dailyMenu)
         {
+            Id = id;
             RestaurantName = restaurantName;
             Url = restaurantUrl;
             Web = web;
+            DailyMenus = dailyMenu;
         }
+
+        public LunchMenu(int id, string restaurantName, string restaurantUrl, string web) : this(id, restaurantName, restaurantUrl, web, new List<DailyMenu>())
+        {
+        }
+
+        public int Id { get; private set; }
 
         public string RestaurantName { get; private set; }
 
@@ -59,9 +66,15 @@ namespace LunchTime.Models
         public string Price { get; set; }
     }
 
+    public class PersonalizedLunchMenu
+    {
+        public LunchMenu Menu { get; set; }
+
+        public bool Bookmarked { get; set; }
+    }
+
     public class LunchMenus
     {
-        public IList<LunchMenu> Menus { get; set; } = new List<LunchMenu>();
-        public IList<RestaurantBase> ToDoRestaurants { get; set; } = new List<RestaurantBase>();
+        public IList<PersonalizedLunchMenu> Menus { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 {
     public class Baroko : MenuBrnoBase
     {
+        public override int Id => 1;
         public override string Name => "Baroko";
         public override string Url => "https://menubrno.cz/restaurace/0076-restaurace-baroko/";
         public override string Web => "";

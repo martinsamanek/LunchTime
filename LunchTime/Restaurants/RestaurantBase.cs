@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Policy;
-using System.Web;
 using HtmlAgilityPack;
 using LunchTime.Models;
 
@@ -9,6 +7,8 @@ namespace LunchTime.Restaurants
 {
     public abstract class RestaurantBase
     {
+        public abstract int Id { get; }
+
         public abstract string Name { get; }
 
         public abstract string Url { get; }
@@ -25,9 +25,9 @@ namespace LunchTime.Restaurants
             return doc;
         }
 
-        protected LunchMenu Create()
+        protected LunchMenu Create(IList<DailyMenu> dailyMenus)
         {
-            return new LunchMenu(Name, Url, Web);
+            return new LunchMenu(Id, Name, Url, Web, dailyMenus);
         }
 
         protected static DateTime StartOfWeek()

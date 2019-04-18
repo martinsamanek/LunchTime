@@ -8,6 +8,8 @@ namespace LunchTime.Restaurants
 {
     public class NaKnofliku : RestaurantBase
     {
+        public override int Id => 23;
+
         public override string Name => "Na Knoflíku";
 
         public override string Url => "http://www.brnorestaurace.cz/tydenni-menu/";
@@ -16,11 +18,9 @@ namespace LunchTime.Restaurants
 
         public override LunchMenu Get()
         {
-            var lunchMenu = Create();
             var web = Fetch();
             var menu = web.DocumentNode.SelectNodes("//*[@id=\"col1\"]/table")[0];
-            lunchMenu.DailyMenus = GetDailyMenus(menu);
-            return lunchMenu;
+            return Create(GetDailyMenus(menu));
         }
 
         private static List<DailyMenu> GetDailyMenus(HtmlNode menu)

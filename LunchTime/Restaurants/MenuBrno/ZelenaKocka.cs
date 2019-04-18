@@ -2,6 +2,7 @@
 {
     public class ZelenaKocka : MenuBrnoBase
     {
+        public override int Id => 9;
         public override string Name => "Zelená Kočka";
         public override string Url => "https://menubrno.cz/restaurace/0262-zelena-kocka---pivovarsky-restaurant/";
         public override string Web => "";
