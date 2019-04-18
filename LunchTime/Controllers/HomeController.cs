@@ -17,33 +17,30 @@ namespace LunchTime.Controllers
 
         public ActionResult Index()
         {
-            var model = new LunchMenus
-            {
-                Menus = MenusProvider.GetMenus(),
-                ToDoRestaurants = MenusProvider.GetRestaurants()
-                
-            };
-            return View(model);
+            return View(SetUpModel(MenusProvider));
         }
 
         public ActionResult Olomouc()
         {
-            var model = new LunchMenus
-            {
-                Menus = MenusOloProvider.GetMenus(),
-                ToDoRestaurants = MenusOloProvider.GetRestaurants()
-            };
-            return View(model);
+            return View("_City", SetUpModel(MenusOloProvider));
         }
 
         public ActionResult Brno()
         {
+            
+            return View("_City", SetUpModel(MenusBrnoProvider));
+        }
+
+        private LunchMenus SetUpModel(MenusProvider menuProvider)
+        {
             var model = new LunchMenus
             {
-                Menus = MenusBrnoProvider.GetMenus(),
-                ToDoRestaurants = MenusBrnoProvider.GetRestaurants()               
+                City = menuProvider.GetCity(),
+                Menus = menuProvider.GetMenus(),
+                ToDoRestaurants = menuProvider.GetRestaurants()
             };
-            return View(model);
+            return model;
         }
+
     }
 }

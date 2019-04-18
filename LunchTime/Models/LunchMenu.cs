@@ -61,6 +61,7 @@ namespace LunchTime.Models
 
     public class LunchMenus
     {
+        public String City { get; set; }
         public IList<LunchMenu> Menus { get; set; } = new List<LunchMenu>();
         public IList<RestaurantBase> ToDoRestaurants { get; set; } = new List<RestaurantBase>();
     }

@@ -38,6 +38,7 @@ namespace LunchTime.Restaurants
 
         private DateTime _lastRefreshDate = DateTime.Today;
 
+        private String _city;
         private IList<LunchMenu> _menusCache;
         private IList<RestaurantBase> _todoRestaurants;
 
@@ -56,10 +57,11 @@ namespace LunchTime.Restaurants
                 .ToList();
         }
 
-        protected virtual IList<LunchMenu> CreateMenus(out IList<RestaurantBase> todoRestaurants)
+        protected virtual IList<LunchMenu> CreateMenus(out IList<RestaurantBase> todoRestaurants, out String city)
         {
             var menus = new ConcurrentBag<LunchMenu>();
             var restaurants = new ConcurrentBag<RestaurantBase>();
+            city = "All";
 
             Parallel.ForEach(
                 GetInstances<RestaurantBase>()
@@ -92,6 +94,12 @@ namespace LunchTime.Restaurants
             return _todoRestaurants;
         }
 
+        public String GetCity()
+        {
+            Refresh();
+            return _city;
+        }
+
         public IList<LunchMenu> GetMenus()
         {
             Refresh();
@@ -106,7 +114,7 @@ namespace LunchTime.Restaurants
                     || _menusCache == null)
                 {
                     _lastRefreshDate = DateTime.Today;
-                    _menusCache = CreateMenus(out _todoRestaurants);
+                    _menusCache = CreateMenus(out _todoRestaurants, out _city);
                 }
             }            
         }

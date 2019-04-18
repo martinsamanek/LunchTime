@@ -12,10 +12,11 @@ namespace LunchTime.Restaurants
 {
     public class MenusOloProvider:MenusProvider
     {
-        protected override IList<LunchMenu> CreateMenus(out IList<RestaurantBase> todoRestaurants)
+        protected override IList<LunchMenu> CreateMenus(out IList<RestaurantBase> todoRestaurants, out String city)
         {
             var menus = new ConcurrentBag<LunchMenu>();
             var restaurants = new ConcurrentBag<RestaurantBase>();
+            city = "Olomouc";
 
             Parallel.ForEach(
                 GetInstances<MenuOlomoucBase>()
