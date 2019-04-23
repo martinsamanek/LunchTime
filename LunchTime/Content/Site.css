@@ -22,3 +22,7 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.map-marker {
+    height: 20px;
+}
