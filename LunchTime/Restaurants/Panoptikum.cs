@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using HtmlAgilityPack;
+using LunchTime.Models;
+using System.Collections.Generic;
+using System.Device.Location;
 using System.Linq;
 using System.Text;
-using HtmlAgilityPack;
-using LunchTime.Models;
 
 namespace LunchTime.Restaurants
 {
@@ -13,6 +14,10 @@ namespace LunchTime.Restaurants
         public override string Url => "http://www.restaurace-panoptikum.cz/denni-menu.html";
 
         public override string Web => "";
+
+        public override GeoCoordinate Location => new GeoCoordinate(49.1965522, 16.6072025);
+
+        public override City City => City.Brno;
 
         public override LunchMenu Get()
         {

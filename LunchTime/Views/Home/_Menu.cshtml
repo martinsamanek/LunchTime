@@ -1,13 +1,21 @@
 ﻿@using System.Globalization
+@using System.Device.Location
+@using LunchTime.Helpers
+
 @model LunchTime.Models.LunchMenu
 
 <div class="col-md-4">
     <h2>
-        <a href="@Model.Url" target="_blank">@Model.RestaurantName</a>
+        <a href="@Model.Url" target="_blank">@Model.RestaurantName</a> 
+        <a href="@MapUrlHelper.GetUrl(Model.Location)" target="_blank">
+            <img src="~/Content/Images/map_marker.svg" alt="Map marker" title="@(Model.DistanceFromOffice) meters away" class="map-marker">
+        </a>
     </h2>
+    
     @{
         var menu = Model.DailyMenus.OrderBy(x => x.Date).FirstOrDefault(m => m.Date.Date >= DateTime.Now.Date);
-        if (menu != null) {
+        if (menu != null)
+        {
             <h4>@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(menu.Date.DayOfWeek) (@menu.Date.ToShortDateString())</h4>
             <ul>
                 @foreach (var soup in menu.Soups)
@@ -23,6 +31,6 @@
                 }
             </ol>
         }
-        
+
     }
 </div>

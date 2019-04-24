@@ -1,16 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using LunchTime.Models;
+using System;
+using System.Collections.Generic;
+using System.Device.Location;
+using System.Linq;
 
 namespace LunchTime.Restaurants
 {
     public class Freeland : RestaurantBase
     {
         public override string Name => "Freeland";
+
         public override string Url => "http://freelandclub.cz/";
+
         public override string Web => "";
+
+        public override GeoCoordinate Location => new GeoCoordinate(49.1963767, 16.6099547);
+
+        public override City City => City.Brno;
 
         public override LunchMenu Get()
         {
