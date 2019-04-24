@@ -2,7 +2,6 @@
 {
     public class PivniOpice : MenuBrnoBase
     {
-        public override int Id => 6;
         public override string Name => "Pivní opice";
         public override string Url => "https://menubrno.cz/restaurace/0073-restaurace-pivni-opice/";
         public override string Web => "";

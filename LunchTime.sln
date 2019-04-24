@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LunchTime", "LunchTime\LunchTime.csproj", "{3566E945-A9CF-4414-8760-CE0E411FE8E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lunchtime.Tests", "Lunchtime.Tests\Lunchtime.Tests.csproj", "{EBA586E0-66E8-4EF9-A963-DF47547EB962}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{3566E945-A9CF-4414-8760-CE0E411FE8E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3566E945-A9CF-4414-8760-CE0E411FE8E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3566E945-A9CF-4414-8760-CE0E411FE8E4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EBA586E0-66E8-4EF9-A963-DF47547EB962}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBA586E0-66E8-4EF9-A963-DF47547EB962}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBA586E0-66E8-4EF9-A963-DF47547EB962}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBA586E0-66E8-4EF9-A963-DF47547EB962}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

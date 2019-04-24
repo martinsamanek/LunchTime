@@ -5,7 +5,6 @@ namespace LunchTime.Restaurants.TODO
 {
     public class Piazza : RestaurantBase
     {
-        public override int Id => 15;
         public override string Name => "Piazza";
         public override string Url => "http://www.piazza.cz/denni-menu.php";
         public override string Web => "";

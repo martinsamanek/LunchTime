@@ -32,23 +32,23 @@ namespace LunchTime.Controllers
             };
         }
 
-        private IList<int> GetBookmarkedIds()
+        private IList<string> GetBookmarkedIds()
         {
             var bookmarkedCookieValue = Request.Cookies[Constants.BookmarkedCookieName]?.Value;
             if (string.IsNullOrEmpty(bookmarkedCookieValue))
             {
-                return new List<int>();
+                return new List<string>();
             }
 
             try
             {
                 var decodedValue = WebUtility.UrlDecode(bookmarkedCookieValue);
-                return JsonConvert.DeserializeObject<List<int>>(decodedValue);
+                return JsonConvert.DeserializeObject<List<string>>(decodedValue);
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e);
-                return new List<int>();
+                return new List<string>();
             }
         }
     }

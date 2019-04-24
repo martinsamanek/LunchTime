@@ -8,7 +8,6 @@ namespace LunchTime.Restaurants
 {
     public class Freeland : RestaurantBase
     {
-        public override int Id => 22;
         public override string Name => "Freeland";
         public override string Url => "http://freelandclub.cz/";
         public override string Web => "";

@@ -2,7 +2,6 @@
 {
     public class Jakoby : MenuBrnoBase
     {
-        public override int Id => 5;
         public override string Name => "Jakoby";
         public override string Url => "https://menubrno.cz/restaurace/0091-jakoby/";
         public override string Web => "";

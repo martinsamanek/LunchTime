@@ -5,7 +5,7 @@ namespace LunchTime.Models
 {
     public class LunchMenu
     {
-        public LunchMenu(int id, string restaurantName, string restaurantUrl, string web, IList<DailyMenu> dailyMenu)
+        public LunchMenu(string id, string restaurantName, string restaurantUrl, string web, IList<DailyMenu> dailyMenu)
         {
             Id = id;
             RestaurantName = restaurantName;
@@ -14,11 +14,11 @@ namespace LunchTime.Models
             DailyMenus = dailyMenu;
         }
 
-        public LunchMenu(int id, string restaurantName, string restaurantUrl, string web) : this(id, restaurantName, restaurantUrl, web, new List<DailyMenu>())
+        public LunchMenu(string id, string restaurantName, string restaurantUrl, string web) : this(id, restaurantName, restaurantUrl, web, new List<DailyMenu>())
         {
         }
 
-        public int Id { get; private set; }
+        public string Id { get; private set; }
 
         public string RestaurantName { get; private set; }
 

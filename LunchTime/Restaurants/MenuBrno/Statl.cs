@@ -2,7 +2,6 @@
 {
     public class Statl : MenuBrnoBase
     {
-        public override int Id => 8;
         public override string Name => "Štatl";
         public override string Url => "https://menubrno.cz/restaurace/0349-Statl/";
         public override string Web => "";

@@ -8,8 +8,6 @@ namespace LunchTime.Restaurants
 {
     public class Panoptikum : RestaurantBase
     {
-        public override int Id => 24;
-
         public override string Name => "Panoptikum";
 
         public override string Url => "http://www.restaurace-panoptikum.cz/denni-menu.html";

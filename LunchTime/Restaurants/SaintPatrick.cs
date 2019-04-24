@@ -7,7 +7,6 @@ namespace LunchTime.Restaurants
 {
     public class SaintPatrick : RestaurantBase
     {
-        public override int Id => 25;
         public override string Name => "Saint Patrick Pub";
         public override string Url => "http://saintpatrickpub.cz/dennni-menu/";
         public override string Web => "";

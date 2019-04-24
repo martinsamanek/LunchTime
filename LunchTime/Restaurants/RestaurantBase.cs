@@ -7,7 +7,7 @@ namespace LunchTime.Restaurants
 {
     public abstract class RestaurantBase
     {
-        public abstract int Id { get; }
+        public string Id => GetType().Name;
 
         public abstract string Name { get; }
 
