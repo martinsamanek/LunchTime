@@ -1,15 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using LunchTime.Models;
+using System.Collections.Generic;
+using System.Device.Location;
+using System.Linq;
 
 namespace LunchTime.Restaurants
 {
     public class SaintPatrick : RestaurantBase
     {
         public override string Name => "Saint Patrick Pub";
+
         public override string Url => "http://saintpatrickpub.cz/dennni-menu/";
+
         public override string Web => "";
+
+        public override GeoCoordinate Location => new GeoCoordinate(49.1962775, 16.6082878);
+
+        public override City City => City.Brno;
 
         public override LunchMenu Get()
         {

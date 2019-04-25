@@ -1,7 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using LunchTime.Models;
+using LunchTime.Services;
+using System;
+using System.Collections.Generic;
+using System.Device.Location;
 
 namespace LunchTime.Restaurants
 {
@@ -15,6 +17,12 @@ namespace LunchTime.Restaurants
 
         public abstract string Web { get; }
 
+        public abstract GeoCoordinate Location { get; }
+
+        public abstract City City { get; }
+
+        public double DistanceFromOffice => LocationService.GetDistanceInMeters(Location, City);
+
         public abstract LunchMenu Get();
 
         protected virtual HtmlDocument Fetch()
@@ -27,7 +35,7 @@ namespace LunchTime.Restaurants
 
         protected LunchMenu Create(IList<DailyMenu> dailyMenus)
         {
-            return new LunchMenu(Id, Name, Url, Web, dailyMenus);
+            return new LunchMenu(Id, Name, Url, Web, dailyMenus, Location, DistanceFromOffice);
         }
 
         protected static DateTime StartOfWeek()

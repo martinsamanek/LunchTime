@@ -1,4 +1,5 @@
 ﻿@using System.Globalization
+@using LunchTime.Helpers
 @model LunchTime.Models.PersonalizedLunchMenu
 
 <h2>
@@ -9,6 +10,9 @@
             <a href="@Model.Menu.Web" target="_blank"> (web)</a>
         }
     }
+    <a href="@MapUrlHelper.GetUrl(Model.Menu.Location)" target="_blank">
+        <img src="~/Content/Images/map_marker.svg" alt="Map marker" title="@(Model.Menu.DistanceFromOffice) meters away" class="map-marker">
+    </a>
     <a class="js-bookmark bookmark-link @(Model.Bookmarked ? "bookmarked" : "")" data-id="@Model.Menu.Id"></a>
 </h2>
 @{

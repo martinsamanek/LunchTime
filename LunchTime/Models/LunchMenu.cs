@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Device.Location;
 
 namespace LunchTime.Models
 {
     public class LunchMenu
     {
-        public LunchMenu(string id, string restaurantName, string restaurantUrl, string web, IList<DailyMenu> dailyMenu)
+        public LunchMenu(string id, string restaurantName, string restaurantUrl, string web, IList<DailyMenu> dailyMenu, GeoCoordinate location, double distanceFromOffice)
         {
             Id = id;
             RestaurantName = restaurantName;
             Url = restaurantUrl;
             Web = web;
             DailyMenus = dailyMenu;
+            Location = location;
+            DistanceFromOffice = distanceFromOffice;
         }
 
-        public LunchMenu(string id, string restaurantName, string restaurantUrl, string web) : this(id, restaurantName, restaurantUrl, web, new List<DailyMenu>())
+        public LunchMenu(string id, string restaurantName, string restaurantUrl, string web, GeoCoordinate location, double distanceFromOffice) : 
+            this(id, restaurantName, restaurantUrl, web, new List<DailyMenu>(), location, distanceFromOffice)
         {
         }
 
@@ -25,6 +29,10 @@ namespace LunchTime.Models
         public string Url { get; private set; }
 
         public string Web { get; private set; }
+
+        public GeoCoordinate Location { get; set; }
+
+        public double DistanceFromOffice { get; set; }
 
         public IList<DailyMenu> DailyMenus { get; set; }
     }

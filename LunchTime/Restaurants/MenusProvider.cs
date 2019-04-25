@@ -63,7 +63,7 @@ namespace LunchTime.Restaurants
             }
             catch (Exception e)
             {
-                menus.Add(new LunchMenu(restaurant.Id, restaurant.Name, restaurant.Url, restaurant.Web));
+                menus.Add(new LunchMenu(restaurant.Id, restaurant.Name, restaurant.Url, restaurant.Web, restaurant.Location, restaurant.DistanceFromOffice));
                 Console.WriteLine(e);
             }
         }

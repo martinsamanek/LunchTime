@@ -1,9 +1,9 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using LunchTime.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using HtmlAgilityPack;
-using LunchTime.Models;
 
 namespace LunchTime.Restaurants
 {
@@ -12,7 +12,7 @@ namespace LunchTime.Restaurants
         protected abstract int[] SoupLinesPositions { get; }
 
         protected abstract int FirstMealLinesPositions { get; }
-        
+
         public override LunchMenu Get()
         {
             var web = Fetch();
@@ -26,6 +26,7 @@ namespace LunchTime.Restaurants
         {
             var days = menu.SelectNodes(".//tbody").ToArray();
             var dailyMenus = new List<DailyMenu>();
+
             for (var i = 0; i < days.Length; i++)
             {
                 var dailyMenu = new DailyMenu(DateTime.Now);
@@ -33,6 +34,7 @@ namespace LunchTime.Restaurants
                 dailyMenu.Meals = GetMeals(days[i]);
                 dailyMenus.Add(dailyMenu);
             }
+
             return dailyMenus;
         }
 
@@ -83,6 +85,7 @@ namespace LunchTime.Restaurants
             mealName = Regex.Replace(mealName, @"^[0-9]\.", "");
 
             var meal = new Meal(mealName, mealPrice);
+
             return meal;
         }
     }
