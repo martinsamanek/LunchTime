@@ -4,43 +4,26 @@
     var itemsPerColumn = 12 / columnSize;
 }
 
-
-@using LunchTime.Helpers
-@using LunchTime.Restaurants
+@using LunchTime.Shared
 @model LunchTime.Models.LunchMenus
-
 
 @for (var c = 0; c < Model.Menus.Count; c = c + itemsPerColumn)
 {
     <div class="row">
-        @{for (var m = 0; m < itemsPerColumn && m+c < Model.Menus.Count; m++)
+        @{for (var m = 0; m < itemsPerColumn && m + c < Model.Menus.Count; m++)
         {
-            Html.RenderPartial("_Menu", Model.Menus[m + c]);
+            <div class="col-md-@(columnSize)">
+                @Html.Partial("_Menu", Model.Menus[m + c])
+            </div>
         }}
     </div>
 }
 
-@for (var c = 0; c < Model.ToDoRestaurants.Count; c = c + itemsPerColumn)
-{
-    <div class="row">
-        @{
-            for (var m = 0; m < itemsPerColumn && m + c < Model.ToDoRestaurants.Count; m++)
-            {
-        <div class="col-md-4">
-            <h2>
-                <a href="@Model.ToDoRestaurants[m + c].Url" target="_blank">@Model.ToDoRestaurants[m + c].Name</a> 
-                <a href="@MapUrlHelper.GetUrl(Model.ToDoRestaurants[m + c].Location)" target="_blank">
-                    <img src="~/Content/Images/map_marker.svg" alt="Map marker" title="@(Model.ToDoRestaurants[m + c].DistanceFromOffice)m away" class="map-marker">
-                </a>
-                @{
-                    if (!string.IsNullOrEmpty(Model.ToDoRestaurants[m + c].Web))
-                    {
-                        <a href="@Model.ToDoRestaurants[m + c].Web" target="_blank"> (web)</a>
-                    }
-                }
-            </h2>
-        </div>
-            }
-        }
-    </div>
+@section scripts {
+    <script src="~/Scripts/lunchtime.js"></script>
+    <script>
+        $(document).ready(function () {
+            init(@SerializationHelper.JsSerializeHtml(Constants.BookmarkedCookieName));
+        });
+    </script>
 }

@@ -2,11 +2,9 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using LunchTime.Models;
-using LunchTime.Restaurants.MenuBrno;
-using LunchTime.Restaurants.TODO;
+using LunchTime.Shared;
 
 namespace LunchTime.Restaurants
 {
@@ -39,41 +37,25 @@ namespace LunchTime.Restaurants
         private DateTime _lastRefreshDate = DateTime.Today;
 
         private IList<LunchMenu> _menusCache;
-        private IList<RestaurantBase> _todoRestaurants;
 
         private readonly object _lock = new object();
-
-        private static IList<T> GetInstances<T>()
+        
+        private static IList<LunchMenu> CreateMenus()
         {
-            return 
-                Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t=> 
-                    (t.BaseType == (typeof(T)) 
-                    || (t.BaseType != null && t.BaseType.BaseType == (typeof(T)))
-                    )
-                    && t.GetConstructor(Type.EmptyTypes) != null)
-                .Select(t => (T) Activator.CreateInstance(t))
+            var menus = new ConcurrentBag<LunchMenu>();
+
+            Parallel.ForEach(
+                RestaurantsHelper.GetInstancesByBaseType<RestaurantBase>()
+                , restaurant => { AddMenu(menus, restaurant); }
+                );
+
+            return menus
+                .OrderByDescending(x => x.DailyMenus.Count)
+                .ThenBy(x => x.RestaurantName)
                 .ToList();
         }
 
-        private static IList<LunchMenu> CreateMenus(out IList<RestaurantBase> todoRestaurants)
-        {
-            var menus = new ConcurrentBag<LunchMenu>();
-            var restaurants = new ConcurrentBag<RestaurantBase>();
-
-            Parallel.ForEach(
-                GetInstances<RestaurantBase>()
-                , restaurant => { AddMenu(menus, restaurants, restaurant); }
-                );
-
-            todoRestaurants = restaurants.ToList();
-            return menus.ToList();
-        }
-
-        private static void AddMenu(
-            ConcurrentBag<LunchMenu> menus
-            , ConcurrentBag<RestaurantBase> todoRestaurants
-            , RestaurantBase restaurant)
+        private static void AddMenu(ConcurrentBag<LunchMenu> menus, RestaurantBase restaurant)
         {
             try
             {
@@ -81,15 +63,9 @@ namespace LunchTime.Restaurants
             }
             catch (Exception e)
             {
-                todoRestaurants.Add(restaurant);
+                menus.Add(new LunchMenu(restaurant.Id, restaurant.Name, restaurant.Url, restaurant.Web, restaurant.Location, restaurant.DistanceFromOffice));
                 Console.WriteLine(e);
             }
-        }
-
-        public IList<RestaurantBase> GetRestaurants()
-        {
-            Refresh();
-            return _todoRestaurants;
         }
 
         public IList<LunchMenu> GetMenus()
@@ -106,7 +82,7 @@ namespace LunchTime.Restaurants
                     || _menusCache == null)
                 {
                     _lastRefreshDate = DateTime.Today;
-                    _menusCache = CreateMenus(out _todoRestaurants);
+                    _menusCache = CreateMenus();
                 }
             }
         }

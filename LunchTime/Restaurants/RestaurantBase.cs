@@ -2,12 +2,15 @@
 using LunchTime.Models;
 using LunchTime.Services;
 using System;
+using System.Collections.Generic;
 using System.Device.Location;
 
 namespace LunchTime.Restaurants
 {
     public abstract class RestaurantBase
     {
+        public string Id => GetType().Name;
+
         public abstract string Name { get; }
 
         public abstract string Url { get; }
@@ -30,9 +33,9 @@ namespace LunchTime.Restaurants
             return doc;
         }
 
-        protected LunchMenu Create()
+        protected LunchMenu Create(IList<DailyMenu> dailyMenus)
         {
-            return new LunchMenu(Name, Url, Web, Location, DistanceFromOffice);
+            return new LunchMenu(Id, Name, Url, Web, dailyMenus, Location, DistanceFromOffice);
         }
 
         protected static DateTime StartOfWeek()

@@ -20,11 +20,9 @@ namespace LunchTime.Restaurants
 
         public override LunchMenu Get()
         {
-            var lunchMenu = Create();
             var web = Fetch();
             var menu = web.DocumentNode.SelectNodes("//*[@id=\"post-141\"]/div/div/div/div/div")[0];
-            lunchMenu.DailyMenus = GetDailyMenus(menu);
-            return lunchMenu;
+            return Create(GetDailyMenus(menu));
         }
 
         private static List<DailyMenu> GetDailyMenus(HtmlNode menu)

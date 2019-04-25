@@ -15,14 +15,11 @@ namespace LunchTime.Restaurants
 
         public override LunchMenu Get()
         {
-            var lunchMenu = Create();
             var web = Fetch();
             var menuContainer = web.DocumentNode.SelectNodes("//div[@itemscope][@itemtype=\"http://schema.org/Restaurant\"]")[0];
             var tables = menuContainer.SelectNodes("//table").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains(" menu "));
             var menu = tables.Single();
-            lunchMenu.DailyMenus = GetDailyMenus(menu);
-
-            return lunchMenu;
+            return Create(GetDailyMenus(menu));
         }
 
         private IList<DailyMenu> GetDailyMenus(HtmlNode menu)

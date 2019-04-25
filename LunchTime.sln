@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LunchTime", "LunchTime\LunchTime.csproj", "{3566E945-A9CF-4414-8760-CE0E411FE8E4}"
 EndProject
@@ -19,13 +19,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://jit-brno.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = LunchTime\\LunchTime.csproj
-		SccProjectName1 = LunchTime
-		SccLocalPath1 = LunchTime
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F9BBA26-C269-4E0B-9B76-EE5B24B6F4DD}
 	EndGlobalSection
 EndGlobal
