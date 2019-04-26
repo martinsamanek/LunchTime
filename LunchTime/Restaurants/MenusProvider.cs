@@ -34,7 +34,7 @@ namespace LunchTime.Restaurants
         };
         /**/
 
-        private DateTime _lastRefreshDate = DateTime.Today;
+        private DateTime _lastRefreshDate = DateTime.MinValue;
 
         private IList<LunchMenu> _menusCache;
 
@@ -78,13 +78,34 @@ namespace LunchTime.Restaurants
         {
             lock (_lock)
             {
-                if (_lastRefreshDate != DateTime.Today 
-                    || _menusCache == null)
+                if (ShouldUpdateCache())
                 {
-                    _lastRefreshDate = DateTime.Today;
+                    _lastRefreshDate = DateTime.Now;
                     _menusCache = CreateMenus();
-                }
+                }                
             }
+        }
+
+        private bool ShouldUpdateCache()
+        {
+            if (_menusCache == null)
+            {
+                return true;
+            }
+
+            const int refreshIntervalInMinutes = 15;
+            var now = DateTime.Now;
+            if (IsBeforeLunchTime(now) && now > _lastRefreshDate.AddMinutes(refreshIntervalInMinutes))
+            {
+                return true;
+            }
+            
+            return _lastRefreshDate.Date != DateTime.Today.Date;
+        }
+
+        private bool IsBeforeLunchTime(DateTime now)
+        {
+            return now.Hour >= 8 && now.Hour <= 12;
         }
     }
 }
