@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    var columnSize = 4;
+    var itemsPerColumn = 12 / columnSize;
+}
+@using LunchTimeCore.Shared
+@model LunchMenus
+
+@for (var c = 0; c < Model.Menus.Count; c = c + itemsPerColumn)
+{
+    <div class="row">
+        @{for (var m = 0; m < itemsPerColumn && m + c < Model.Menus.Count; m++)
+        {
+            <div class="col-md-@(columnSize)">
+                @Html.Partial("_Menu", Model.Menus[m + c])
+            </div>
+        }}
+    </div>
+}
+
+@section scripts {
+    <script src="~/js/lunchtime.js"></script>
+    <script>
+        $(document).ready(function () {
+            init(@SerializationHelper.JsSerializeHtml(Constants.BookmarkedCookieName));
+        });
+    </script>
+}
