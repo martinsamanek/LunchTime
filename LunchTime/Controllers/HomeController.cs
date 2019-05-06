@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Web.Mvc;
 using LunchTime.Models;
 using LunchTime.Restaurants;
 using LunchTime.Shared;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
 namespace LunchTime.Controllers
@@ -34,7 +34,7 @@ namespace LunchTime.Controllers
 
         private IList<string> GetBookmarkedIds()
         {
-            var bookmarkedCookieValue = Request.Cookies[Constants.BookmarkedCookieName]?.Value;
+            var bookmarkedCookieValue = Request.Cookies[Constants.BookmarkedCookieName];
             if (string.IsNullOrEmpty(bookmarkedCookieValue))
             {
                 return new List<string>();

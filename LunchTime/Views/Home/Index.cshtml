@@ -3,9 +3,8 @@
     var columnSize = 4;
     var itemsPerColumn = 12 / columnSize;
 }
-
 @using LunchTime.Shared
-@model LunchTime.Models.LunchMenus
+@model LunchMenus
 
 @for (var c = 0; c < Model.Menus.Count; c = c + itemsPerColumn)
 {
@@ -20,7 +19,7 @@
 }
 
 @section scripts {
-    <script src="~/Scripts/lunchtime.js"></script>
+    <script src="~/js/lunchtime.js"></script>
     <script>
         $(document).ready(function () {
             init(@SerializationHelper.JsSerializeHtml(Constants.BookmarkedCookieName));

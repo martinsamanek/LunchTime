@@ -1,4 +1,4 @@
-﻿using System.Device.Location;
+﻿using GeoCoordinatePortable;
 using LunchTime.Models;
 
 namespace LunchTime.Restaurants.MenuBrno

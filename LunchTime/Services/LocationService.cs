@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Device.Location;
+using GeoCoordinatePortable;
 using LunchTime.Models;
 
 namespace LunchTime.Services
