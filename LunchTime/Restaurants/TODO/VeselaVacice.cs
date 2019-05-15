@@ -1,6 +1,6 @@
 ﻿using LunchTime.Models;
 using System;
-using System.Device.Location;
+using GeoCoordinatePortable;
 
 namespace LunchTime.Restaurants.TODO
 {

@@ -1,16 +1,15 @@
-﻿using System.Web.Mvc;
-using System.Web.Script.Serialization;
+﻿using Microsoft.AspNetCore.Html;
+using Newtonsoft.Json;
 
 namespace LunchTime.Shared
 {
     public static class SerializationHelper
     {
-        public static MvcHtmlString JsSerializeHtml(object obj)
+        public static HtmlString JsSerializeHtml(object obj)
         {
-            var serializer = new JavaScriptSerializer();
-            var serializedData = serializer.Serialize(obj);
+            var serializedData = JsonConvert.SerializeObject(obj);
 
-            return new MvcHtmlString(serializedData);
+            return new HtmlString(serializedData);
         }
     }
 }

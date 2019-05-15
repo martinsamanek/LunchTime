@@ -3,7 +3,7 @@ using LunchTime.Models;
 using LunchTime.Services;
 using System;
 using System.Collections.Generic;
-using System.Device.Location;
+using GeoCoordinatePortable;
 
 namespace LunchTime.Restaurants
 {

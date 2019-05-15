@@ -1,4 +1,4 @@
-﻿using System.Device.Location;
+﻿using GeoCoordinatePortable;
 using LunchTime.Models;
 using LunchTime.Services;
 

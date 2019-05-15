@@ -1,7 +1,7 @@
 ﻿using HtmlAgilityPack;
 using LunchTime.Models;
 using System.Collections.Generic;
-using System.Device.Location;
+using GeoCoordinatePortable;
 using System.Linq;
 
 namespace LunchTime.Restaurants
