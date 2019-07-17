@@ -1,12 +1,15 @@
 ﻿'use strict';
 var DATA_ID = 'id',
     COOKIE_EXPIRATION_DAYS = 365,
-    COOKIE_NAME,
+    BOOKMARK_COOKIE_NAME,
     BOOKMARK_LINK_SELECTOR = '.js-bookmark',
-    BOOKMARKED_CLASS = 'bookmarked';
+    BOOKMARKED_CLASS = 'bookmarked',
+    CITY_COOKIE_NAME,
+    CITY_SELECTOR = '.city';
 
-function init(cookieName) {
-    COOKIE_NAME = cookieName;
+function init(bookmarkCookieName, cityCookieName) {
+    BOOKMARK_COOKIE_NAME = bookmarkCookieName;
+    CITY_COOKIE_NAME = cityCookieName;
     registerHandlers();
 }
 
@@ -19,6 +22,7 @@ function registerHandlers() {
         $link.toggleClass(BOOKMARKED_CLASS, bookmarked.includes(id));
         setBookmarkCookie(bookmarked);        
     });
+    $(CITY_SELECTOR).on('change', cityChanged);
 }
 
 function addOrRemoveBookmarked(id) {
@@ -35,18 +39,25 @@ function addOrRemoveBookmarked(id) {
 
 function setBookmarkCookie(bookmarkedArray) {
     if (bookmarkedArray.length === 0) {
-        $.removeCookie(COOKIE_NAME);
+        $.removeCookie(BOOKMARK_COOKIE_NAME);
         return;
     }    
 
-    $.cookie(COOKIE_NAME, JSON.stringify(bookmarkedArray), { expires: COOKIE_EXPIRATION_DAYS });
+    $.cookie(BOOKMARK_COOKIE_NAME, JSON.stringify(bookmarkedArray), { expires: COOKIE_EXPIRATION_DAYS });
 }
 
 function getBookmarkedArray() {
-    var cookieValue = $.cookie(COOKIE_NAME);
+    var cookieValue = $.cookie(BOOKMARK_COOKIE_NAME);
     if (cookieValue === undefined) {
         return [];
     }
 
-    return JSON.parse($.cookie(COOKIE_NAME));
+    return JSON.parse($.cookie(BOOKMARK_COOKIE_NAME));
+}
+
+function cityChanged() {
+    var $citySelector = $(this);
+    debugger;
+    $.cookie(CITY_COOKIE_NAME, $citySelector.val(), { expires: COOKIE_EXPIRATION_DAYS });
+    window.location.reload(true);
 }

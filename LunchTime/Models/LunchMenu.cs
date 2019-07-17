@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using GeoCoordinatePortable;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LunchTime.Models
 {
     public class LunchMenu
     {
-        public LunchMenu(string id, string restaurantName, string restaurantUrl, string web, IList<DailyMenu> dailyMenu, GeoCoordinate location, double distanceFromOffice)
+        public LunchMenu(string id, string restaurantName, string restaurantUrl, string web, IList<DailyMenu> dailyMenu, GeoCoordinate location, double distanceFromOffice, City city)
         {
             Id = id;
             RestaurantName = restaurantName;
@@ -15,10 +16,11 @@ namespace LunchTime.Models
             DailyMenus = dailyMenu;
             Location = location;
             DistanceFromOffice = distanceFromOffice;
+            City = city;
         }
 
-        public LunchMenu(string id, string restaurantName, string restaurantUrl, string web, GeoCoordinate location, double distanceFromOffice) : 
-            this(id, restaurantName, restaurantUrl, web, new List<DailyMenu>(), location, distanceFromOffice)
+        public LunchMenu(string id, string restaurantName, string restaurantUrl, string web, GeoCoordinate location, double distanceFromOffice, City city) : 
+            this(id, restaurantName, restaurantUrl, web, new List<DailyMenu>(), location, distanceFromOffice, city)
         {
         }
 
@@ -31,6 +33,8 @@ namespace LunchTime.Models
         public string Web { get; private set; }
 
         public GeoCoordinate Location { get; set; }
+
+        public City City { get; set; }
 
         public double DistanceFromOffice { get; set; }
 
@@ -84,5 +88,9 @@ namespace LunchTime.Models
     public class LunchMenus
     {
         public IList<PersonalizedLunchMenu> Menus { get; set; }
+
+        public IList<SelectListItem> Cities { get; set; }
+
+        public City? SelectedCity { get; set; }
     }
 }
