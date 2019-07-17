@@ -57,7 +57,6 @@ function getBookmarkedArray() {
 
 function cityChanged() {
     var $citySelector = $(this);
-    debugger;
     $.cookie(CITY_COOKIE_NAME, $citySelector.val(), { expires: COOKIE_EXPIRATION_DAYS });
     window.location.reload(true);
 }
