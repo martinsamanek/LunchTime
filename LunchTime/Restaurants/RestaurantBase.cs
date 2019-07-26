@@ -35,7 +35,7 @@ namespace LunchTime.Restaurants
 
         protected LunchMenu Create(IList<DailyMenu> dailyMenus)
         {
-            return new LunchMenu(Id, Name, Url, Web, dailyMenus, Location, DistanceFromOffice);
+            return new LunchMenu(Id, Name, Url, Web, dailyMenus, Location, DistanceFromOffice, City);
         }
 
         protected static DateTime StartOfWeek()

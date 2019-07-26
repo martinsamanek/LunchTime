@@ -1,5 +1,4 @@
 ﻿using GeoCoordinatePortable;
-using GeoCoordinatePortable;
 using LunchTime.Models;
 
 namespace LunchTime.Restaurants.MenuBrno
