@@ -3,7 +3,7 @@ using LunchTime.Models;
 
 namespace LunchTime.Restaurants.MenuBrno
 {
-    public class DaVinci : MenuBrnoBase
+    public class DaVinci : MenuBrnoBase, IRestaurant
     {
         public override string Name => "Da Vinci Restaurant & Caffe Bar";
 

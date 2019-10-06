@@ -4,7 +4,7 @@ using LunchTime.Services;
 
 namespace LunchTime.Restaurants.MenuBrno
 {
-    public class Baroko : MenuBrnoBase
+    public class Baroko : MenuBrnoBase, IRestaurant
     {
         public override string Name => "Baroko";
 

@@ -4,50 +4,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LunchTime.Models;
-using LunchTime.Shared;
+using Microsoft.Extensions.Logging;
 
 namespace LunchTime.Restaurants
 {
-    public class MenusProvider
+    public class MenusProvider : ISingleton
     {
-        /* 
-        // Not needed loaded automatically with reflection see CreateMenus method.
-        private static readonly List<RestaurantBase> Restaurants = new List<RestaurantBase>
-        {
-            new Panoptikum(),
-            new NaKnofliku(),
-            new Freeland(),
-            new Jakoby(),
-            new Statl(),
-            new ZelenaKocka(),
-            new PivniOpice(),
-            new DrevenyOrel(),
-            new Leonessa(),
-            new Piazza(),
-            new Ratejna(),
-            new UKola(),
-            new UTrechCertu(),
-            new VeselaVacice(),
-            new ZlataMuska(),
-            new SaintPatrick(),
-            new Thalie(),
-        };
-        /**/
-
         private DateTime _lastRefreshDate = DateTime.Today;
-
         private IList<LunchMenu> _menusCache;
-
-        private readonly object _lock = new object();
+        private readonly IEnumerable<IRestaurant> _restaurants;
+        private readonly ILogger<MenusProvider> _logger;
         
-        private static IList<LunchMenu> CreateMenus()
+        private readonly object _lock = new object();
+
+        public MenusProvider(IEnumerable<IRestaurant> restaurants, ILogger<MenusProvider> logger)
+        {
+            _restaurants = restaurants;
+            _logger = logger;
+        }
+
+        private IList<LunchMenu> CreateMenus()
         {
             var menus = new ConcurrentBag<LunchMenu>();
 
-            Parallel.ForEach(
-                RestaurantsHelper.GetInstancesByBaseType<RestaurantBase>()
-                , restaurant => { AddMenu(menus, restaurant); }
-                );
+            Parallel.ForEach(_restaurants, restaurant => { AddMenu(menus, restaurant); });
 
             return menus
                 .OrderByDescending(x => x.DailyMenus.Count)
@@ -55,7 +35,7 @@ namespace LunchTime.Restaurants
                 .ToList();
         }
 
-        private static void AddMenu(ConcurrentBag<LunchMenu> menus, RestaurantBase restaurant)
+        private void AddMenu(ConcurrentBag<LunchMenu> menus, IRestaurant restaurant)
         {
             try
             {
@@ -63,8 +43,8 @@ namespace LunchTime.Restaurants
             }
             catch (Exception e)
             {
-                menus.Add(new LunchMenu(restaurant.Id, restaurant.Name, restaurant.Url, restaurant.Web, restaurant.Location, restaurant.DistanceFromOffice, restaurant.City));
-                Console.WriteLine(e);
+                menus.Add(restaurant.Empty());
+                _logger.LogError(e, e.Message);
             }
         }
 

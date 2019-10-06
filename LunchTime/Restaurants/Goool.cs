@@ -3,10 +3,12 @@ using LunchTime.Models;
 using System.Collections.Generic;
 using GeoCoordinatePortable;
 using System.Linq;
+using LunchTime.Restaurants.MenuBrno;
+using LunchTime.Restaurants.TODO;
 
 namespace LunchTime.Restaurants
 {
-    public class Goool : RestaurantBase
+    public class Goool : RestaurantBase, IRestaurant
     {
         public override string Name => "Goool";
 

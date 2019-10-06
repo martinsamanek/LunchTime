@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-    var columnSize = 4;
+    var columnSize = MenuLayoutOptions.Value.ColumnSize; 
     var itemsPerColumn = 12 / columnSize;
 }
 @using LunchTime.Shared
@@ -21,9 +21,9 @@
     <div class="row">
         @{for (var m = 0; m < itemsPerColumn && m + c < Model.Menus.Count; m++)
             {
-            <div class="col-md-@(columnSize)">
-                @{ Html.RenderPartial("_Menu", Model.Menus[m + c]); }
-            </div>
+                <div class="col-md-@(columnSize)">
+                    <partial name="_Menu" model="@Model.Menus[m + c]"/>
+                </div>
         }}
     </div>
 }

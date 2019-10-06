@@ -3,7 +3,7 @@ using LunchTime.Models;
 
 namespace LunchTime.Restaurants.MenuBrno
 {
-    public class Spolek : MenuBrnoBase
+    public class Spolek : MenuBrnoBase, IRestaurant
     {
         public override string Name => "Spolek";
 

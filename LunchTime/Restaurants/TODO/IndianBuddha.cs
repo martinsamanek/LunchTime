@@ -1,10 +1,11 @@
 ﻿using LunchTime.Models;
 using System;
 using GeoCoordinatePortable;
+using LunchTime.Restaurants.MenuBrno;
 
 namespace LunchTime.Restaurants.TODO
 {
-    public class IndianBuddha : RestaurantBase
+    public class IndianBuddha : RestaurantBase, IRestaurant
     {
         public override string Name => "Indian buddha";
 

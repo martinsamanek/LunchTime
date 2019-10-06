@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using LunchTime.Restaurants;
+using LunchTime.Restaurants.MenuBrno;
+using LunchTime.Restaurants.TODO;
 
 namespace LunchTime.Shared
 {

@@ -3,10 +3,11 @@ using LunchTime.Models;
 using System.Collections.Generic;
 using GeoCoordinatePortable;
 using System.Linq;
+using LunchTime.Restaurants.MenuBrno;
 
 namespace LunchTime.Restaurants
 {
-    public class SaintPatrick : RestaurantBase
+    public class SaintPatrick : RestaurantBase, IRestaurant
     {
         public override string Name => "Saint Patrick Pub";
 

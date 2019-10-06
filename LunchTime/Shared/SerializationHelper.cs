@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Html;
-using Newtonsoft.Json;
+﻿using System.Text.Json;
+using Microsoft.AspNetCore.Html;
 
 namespace LunchTime.Shared
 {
@@ -7,7 +7,7 @@ namespace LunchTime.Shared
     {
         public static HtmlString JsSerializeHtml(object obj)
         {
-            var serializedData = JsonConvert.SerializeObject(obj);
+            var serializedData = JsonSerializer.Serialize(obj);
 
             return new HtmlString(serializedData);
         }

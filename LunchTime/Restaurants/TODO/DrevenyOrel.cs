@@ -1,10 +1,11 @@
 ﻿using LunchTime.Models;
 using System;
 using GeoCoordinatePortable;
+using LunchTime.Restaurants.MenuBrno;
 
 namespace LunchTime.Restaurants.TODO
 {
-    public class DrevenyOrel : RestaurantBase
+    public class DrevenyOrel : RestaurantBase, IRestaurant
     {
         public override string Name => "U Dreveneho Orla";
 

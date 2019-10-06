@@ -25,6 +25,11 @@ namespace LunchTime.Restaurants
 
         public abstract LunchMenu Get();
 
+        public virtual LunchMenu Empty()
+        {
+            return new LunchMenu(Id, Name, Url, Web, Location, DistanceFromOffice, City);
+        }
+
         protected virtual HtmlDocument Fetch()
         {
             var web = new HtmlWeb();

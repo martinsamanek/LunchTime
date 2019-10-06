@@ -4,10 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using LunchTime.Restaurants.MenuBrno;
 
 namespace LunchTime.Restaurants
 {
-    public abstract class MenuBrnoBase : RestaurantBase
+    public abstract class MenuBrnoBase : RestaurantBase, IRestaurant
     {
         protected abstract int[] SoupLinesPositions { get; }
 

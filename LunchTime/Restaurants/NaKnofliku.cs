@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using GeoCoordinatePortable;
 using System.Linq;
 using System.Web;
+using LunchTime.Restaurants.MenuBrno;
 
 namespace LunchTime.Restaurants
 {
-    public class NaKnofliku : RestaurantBase
+    public class NaKnofliku : RestaurantBase, IRestaurant
     {
         public override string Name => "Na Knoflíku";
 
