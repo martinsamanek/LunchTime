@@ -5,6 +5,8 @@ using System.Linq;
 using System.Net;
 using LunchTime.Models;
 using LunchTime.Restaurants;
+using LunchTime.Services.Auth;
+using LunchTime.Services.Voting;
 using LunchTime.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,6 +16,14 @@ namespace LunchTime.Controllers
 {
     public class HomeController : Controller
     {
+        public HomeController(IUserGuard userGuard, IVotesProvider votesProvider)
+        {
+            UserGuard = userGuard;
+            VotesProvider = votesProvider;
+        }
+
+        private IUserGuard UserGuard { get; }
+        private IVotesProvider VotesProvider { get; }
         private static readonly MenusProvider MenusProvider = new MenusProvider();
 
         public ActionResult Index()
@@ -25,6 +35,13 @@ namespace LunchTime.Controllers
         private LunchMenus GetModel()
         {
             var menus = MenusProvider.GetMenus();
+            foreach (var lunchMenu in menus)
+            {
+                lunchMenu.VotesCount = VotesProvider.CountVotes(lunchMenu.Id);
+                lunchMenu.Voted = UserGuard.IsAuthenticated() && 
+                                  !VotesProvider.CanVote(UserGuard.GetUser().Id, lunchMenu.Id);
+            }
+            
             var selectedCity = GetSelectedCity();
             var cities = menus
                         .Select(x => x.City)

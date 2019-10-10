@@ -1,12 +1,15 @@
-﻿@{
+﻿@inject IUserGuard UserGuard
+@{
     ViewBag.Title = "Home Page";
     var columnSize = 4;
     var itemsPerColumn = 12 / columnSize;
+    var user = UserGuard.GetUser();
 }
+@using LunchTime.Services.Auth
 @using LunchTime.Shared
 @model LunchMenus
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-between">
         <form>
             <div class="form-group">
                 <select asp-for="@Model.SelectedCity" asp-items="@Model.Cities" class="city form-control">
@@ -14,6 +17,19 @@
                 </select>
             </div>
         </form>
+
+        <div>
+            @if (UserGuard.IsAuthenticated())
+            {
+                <form id="logoutForm" method="post" action="@Url.Content("~/api/auth/logout")"></form>    
+                <span class="text-white">Vítej <strong>@(user.Name)</strong>,</span>
+                <a href="#" class="text-white logout">Odhlásit se</a>
+            }
+            else
+            {
+                <a href="#" class="text-white" data-toggle="modal" data-target="#loginModal">Přihlásit se</a>
+            }
+        </div>
     </nav>
 
 @for (var c = 0; c < Model.Menus.Count; c = c + itemsPerColumn)
@@ -28,9 +44,17 @@
     </div>
 }
 
+@{ Html.RenderPartial("_AuthModals"); }
+
 @section scripts {
     <script src="~/js/lunchtime.js"></script>
+    <script src="~/js/user.js"></script>
     <script>
+        window.appConfig = {
+            voteEndpoint: "@Url.Content("~/api/vote")",
+            username: "@(UserGuard.IsAuthenticated() ? user.Name : "")"    
+        }; 
+        
         $(document).ready(function () {
             init(@SerializationHelper.JsSerializeHtml(Constants.BookmarkedCookieName), @SerializationHelper.JsSerializeHtml(Constants.SelectedCityCookieName));
         });

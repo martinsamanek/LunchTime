@@ -14,6 +14,10 @@
         <img src="~/Images/map_marker.svg" alt="Map marker" title="@(Model.Menu.DistanceFromOffice) meters away" class="map-marker">
     </a>
     <a class="js-bookmark bookmark-link @(Model.Bookmarked ? "bookmarked" : "")" data-id="@Model.Menu.Id"></a>
+    <a class="js-vote vote-link @(Model.Menu.Voted ? "voted" : "")" data-id="@Model.Menu.Id"></a>
+    <span class="votes-count">
+        @Model.Menu.VotesCount
+    </span>
 </h2>
 @{
     var menu = Model.Menu.DailyMenus.OrderBy(x => x.Date).FirstOrDefault(m => m.Date.Date >= DateTime.Now.Date);

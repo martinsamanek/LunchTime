@@ -39,6 +39,10 @@ namespace LunchTime.Models
         public double DistanceFromOffice { get; set; }
 
         public IList<DailyMenu> DailyMenus { get; set; }
+        
+        public int VotesCount { get; set; }
+        
+        public bool Voted { get; set; }
     }
 
     public class DailyMenu

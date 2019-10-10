@@ -72,10 +72,20 @@ textarea {
     content: url(/Images/star_white.png);
 }
 
-    .bookmark-link.bookmarked {
-        content: url(/Images/star_yellow.png);
-    }
+.bookmark-link.bookmarked {
+    content: url(/Images/star_yellow.png);
+}
 
 .map-marker {
     height: 20px;
+}
+
+.vote-link {
+    width: 32px;
+    height: 32px;
+    content: url(/Images/chevron-up.png);
+}
+
+.vote-link.voted {
+    content: url(/Images/chevron-up-filled.png);
 }
