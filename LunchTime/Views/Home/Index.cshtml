@@ -1,38 +1,37 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
-    var columnSize = 4;
-    var itemsPerColumn = 12 / columnSize;
+	ViewBag.Title = "Home Page";
+	var columnSize = 4;
+	var itemsPerColumn = 12 / columnSize;
 }
-@using LunchTime.Shared
 @model LunchMenus
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <form>
-            <div class="form-group">
-                <select asp-for="@Model.SelectedCity" asp-items="@Model.Cities" class="city form-control">
-                    <option>Vyberte město...</option>
-                </select>
-            </div>
-        </form>
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<form>
+		<div class="form-group">
+			<select asp-for="@Model.SelectedCity" asp-items="@Model.Cities" class="city form-control">
+				<option>Vyberte město...</option>
+			</select>
+		</div>
+	</form>
+</nav>
 
 @for (var c = 0; c < Model.Menus.Count; c = c + itemsPerColumn)
 {
-    <div class="row">
-        @{for (var m = 0; m < itemsPerColumn && m + c < Model.Menus.Count; m++)
-            {
-            <div class="col-md-@(columnSize)">
-                @{ Html.RenderPartial("_Menu", Model.Menus[m + c]); }
-            </div>
-        }}
-    </div>
+	<div class="row">
+		@{for (var m = 0; m < itemsPerColumn && m + c < Model.Menus.Count; m++)
+			{
+				<div class="col-md-@(columnSize)">
+					@{ Html.RenderPartial("_Menu", Model.Menus[m + c]); }
+				</div>
+			}}
+	</div>
 }
 
 @section scripts {
-    <script src="~/js/lunchtime.js"></script>
-    <script>
-        $(document).ready(function () {
-            init(@SerializationHelper.JsSerializeHtml(Constants.BookmarkedCookieName), @SerializationHelper.JsSerializeHtml(Constants.SelectedCityCookieName));
-        });
-    </script>
+	<script src="~/js/lunchtime.js"></script>
+	<script>
+		  $(document).ready(function () {
+				init(@Constants.BookmarkedCookieName.JsSerializeHtml(), @Constants.SelectedCityCookieName.JsSerializeHtml());
+		  });
+	</script>
 }

@@ -1,92 +1,92 @@
-﻿using HtmlAgilityPack;
-using LunchTime.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using HtmlAgilityPack;
+using LunchTime.Models;
 
 namespace LunchTime.Restaurants
 {
-    public abstract class MenuBrnoBase : RestaurantBase
-    {
-        protected abstract int[] SoupLinesPositions { get; }
+	public abstract class MenuBrnoBase : RestaurantBase
+	{
+		protected abstract int[] SoupLinesPositions { get; }
 
-        protected abstract int FirstMealLinesPositions { get; }
+		protected abstract int FirstMealLinesPositions { get; }
 
-        public override LunchMenu Get()
-        {
-            var web = Fetch();
-            var menuContainer = web.DocumentNode.SelectNodes("//div[@itemscope][@itemtype=\"http://schema.org/Restaurant\"]")[0];
-            var tables = menuContainer.SelectNodes("//table").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains(" menu "));
-            var menu = tables.Single();
-            return Create(GetDailyMenus(menu));
-        }
+		public override LunchMenu Get()
+		{
+			var web = Fetch();
+			var menuContainer = web.DocumentNode.SelectNodes("//div[@itemscope][@itemtype=\"http://schema.org/Restaurant\"]")[0];
+			var tables = menuContainer.SelectNodes("//table").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains(" menu "));
+			var menu = tables.Single();
+			return Create(GetDailyMenus(menu));
+		}
 
-        private IList<DailyMenu> GetDailyMenus(HtmlNode menu)
-        {
-            var days = menu.SelectNodes(".//tbody").ToArray();
-            var dailyMenus = new List<DailyMenu>();
+		private IList<DailyMenu> GetDailyMenus(HtmlNode menu)
+		{
+			var days = menu.SelectNodes(".//tbody").ToArray();
+			var dailyMenus = new List<DailyMenu>();
 
-            for (var i = 0; i < days.Length; i++)
-            {
-                var dailyMenu = new DailyMenu(DateTime.Now);
-                dailyMenu.Soups = GetSoups(days[i]);
-                dailyMenu.Meals = GetMeals(days[i]);
-                dailyMenus.Add(dailyMenu);
-            }
+			for (var i = 0; i < days.Length; i++)
+			{
+				var dailyMenu = new DailyMenu(DateTime.Now);
+				dailyMenu.Soups = GetSoups(days[i]);
+				dailyMenu.Meals = GetMeals(days[i]);
+				dailyMenus.Add(dailyMenu);
+			}
 
-            return dailyMenus;
-        }
+			return dailyMenus;
+		}
 
-        private List<Soup> GetSoups(HtmlNode day)
-        {
-            var soups = new List<Soup>();
+		private List<Soup> GetSoups(HtmlNode day)
+		{
+			var soups = new List<Soup>();
 
-            foreach (var soupLinePosition in SoupLinesPositions)
-            {
-                var soup = new Soup(day.SelectNodes($".//tr[{soupLinePosition}]/td[1]")[0].InnerText);
-                soups.Add(soup);
-            }
-            
-            return soups;
-        }
+			foreach (var soupLinePosition in SoupLinesPositions)
+			{
+				var soup = new Soup(day.SelectNodes($".//tr[{soupLinePosition}]/td[1]")[0].InnerText);
+				soups.Add(soup);
+			}
 
-        private List<Meal> GetMeals(HtmlNode day)
-        {
-            var meals = new List<Meal>();
+			return soups;
+		}
 
-            //foreach (var mealLinePosition in MealLinesPositions)
-            //{
-            //    var meal = GetMeal(day.SelectNodes($".//tr[{mealLinePosition}]")[0]);
-            //    meals.Add(meal);
-            //}
+		private List<Meal> GetMeals(HtmlNode day)
+		{
+			var meals = new List<Meal>();
 
-            for (int i = FirstMealLinesPositions; i < int.MaxValue; i++)
-            {
-                var mealNode = day.SelectNodes($".//tr[{i}]");
+			//foreach (var mealLinePosition in MealLinesPositions)
+			//{
+			//    var meal = GetMeal(day.SelectNodes($".//tr[{mealLinePosition}]")[0]);
+			//    meals.Add(meal);
+			//}
 
-                if (mealNode == null || !mealNode[0].HasChildNodes)
-                {
-                    break;
-                }
+			for (int i = FirstMealLinesPositions; i < int.MaxValue; i++)
+			{
+				var mealNode = day.SelectNodes($".//tr[{i}]");
 
-                var meal = GetMeal(mealNode[0]);
-                meals.Add(meal);
-            }
+				if (mealNode == null || !mealNode[0].HasChildNodes)
+				{
+					break;
+				}
 
-            return meals;
-        }
-        
-        private static Meal GetMeal(HtmlNode mealNode)
-        {
-            var mealName = mealNode.SelectNodes(".//td[1]")[0].InnerText;
-            var mealPrice = mealNode.SelectNodes(".//td[2]")[0].InnerText;
+				var meal = GetMeal(mealNode[0]);
+				meals.Add(meal);
+			}
 
-            mealName = Regex.Replace(mealName, @"^[0-9]\.", "");
+			return meals;
+		}
 
-            var meal = new Meal(mealName, mealPrice);
+		private static Meal GetMeal(HtmlNode mealNode)
+		{
+			var mealName = mealNode.SelectNodes(".//td[1]")[0].InnerText;
+			var mealPrice = mealNode.SelectNodes(".//td[2]")[0].InnerText;
 
-            return meal;
-        }
-    }
+			mealName = Regex.Replace(mealName, @"^[0-9]\.", "");
+
+			var meal = new Meal(mealName, mealPrice);
+
+			return meal;
+		}
+	}
 }

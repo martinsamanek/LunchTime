@@ -1,4 +1,4 @@
-﻿namespace LunchTime.Shared
+﻿namespace LunchTime
 {
     public static class Constants
     {

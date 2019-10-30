@@ -1,22 +1,22 @@
 ﻿using GeoCoordinatePortable;
-using LunchTime.Models;
+using LunchTime.Enums;
 
 namespace LunchTime.Restaurants.MenuBrno
 {
-    public class Charlies : MenuBrnoBase
-    {
-        public override string Name => "Charlies square";
+	public class Charlies : MenuBrnoBase
+	{
+		public override string Name => "Charlies square";
 
-        public override string Url => "https://menubrno.cz/restaurace/0070-charlies-square/";
+		public override string Url => "https://menubrno.cz/restaurace/0070-charlies-square/";
 
-        public override string Web => "http://www.charliessquare.cz/denni-menu";
+		public override string Web => "http://www.charliessquare.cz/denni-menu";
 
-        public override GeoCoordinate Location => new GeoCoordinate(49.1927244, 16.6112872);
+		public override GeoCoordinate Location => new GeoCoordinate(49.1927244, 16.6112872);
 
-        public override City City => City.Brno;
+		public override CityEnum City => CityEnum.Brno;
 
-        protected override int[] SoupLinesPositions => new[] {1};
+		protected override int[] SoupLinesPositions => new[] { 1 };
 
-        protected override int FirstMealLinesPositions => 2;
-    }
+		protected override int FirstMealLinesPositions => 2;
+	}
 }

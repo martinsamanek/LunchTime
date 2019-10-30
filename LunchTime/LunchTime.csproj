@@ -16,6 +16,7 @@
 
 
   <ItemGroup>
+    <Folder Include="Shared\" />
     <Folder Include="wwwroot\Images\" />
   </ItemGroup>
 
