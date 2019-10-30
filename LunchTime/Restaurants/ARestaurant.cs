@@ -8,7 +8,7 @@ using LunchTime.Services;
 
 namespace LunchTime.Restaurants
 {
-	public abstract class RestaurantBase
+	public abstract class ARestaurant
 	{
 		public string Id => GetType().Name;
 

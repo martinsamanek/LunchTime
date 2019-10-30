@@ -5,7 +5,7 @@ using LunchTime.Models;
 
 namespace LunchTime.Restaurants.TODO
 {
-	public class Thalie : RestaurantBase
+	public class Thalie : ARestaurant
 	{
 		public override string Name => "Thalie";
 

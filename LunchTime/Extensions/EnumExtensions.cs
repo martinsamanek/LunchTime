@@ -17,7 +17,6 @@ namespace LunchTime
 				var success = Enum.TryParse<T>(value, true, out var parseResult);
 				if (success)
 					result = parseResult;
-
 			}
 			catch (Exception ex)
 			{

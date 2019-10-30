@@ -12,7 +12,8 @@ namespace LunchTime.Services
 	public class MenuService : IMenuService
 	{
 		#region private
-		/* 
+
+		/*
 		// Not needed loaded automatically with reflection see CreateMenus method.
 		private static readonly List<RestaurantBase> Restaurants = new List<RestaurantBase>
 		{
@@ -42,12 +43,11 @@ namespace LunchTime.Services
 
 		private readonly object _lock = new object();
 
-
 		private IList<LunchMenu> CreateMenus()
 		{
 			var menus = new ConcurrentBag<LunchMenu>();
 
-			Parallel.ForEach(GetInstancesByBaseType<RestaurantBase>(), restaurant => { AddMenu(menus, restaurant); });
+			Parallel.ForEach(GetInstancesByBaseType<ARestaurant>(), restaurant => { AddMenu(menus, restaurant); });
 
 			return menus
 				.OrderByDescending(x => x.DailyMenus.Count)
@@ -55,7 +55,7 @@ namespace LunchTime.Services
 				.ToList();
 		}
 
-		private void AddMenu(ConcurrentBag<LunchMenu> menus, RestaurantBase restaurant)
+		private void AddMenu(ConcurrentBag<LunchMenu> menus, ARestaurant restaurant)
 		{
 			try
 			{
@@ -68,10 +68,11 @@ namespace LunchTime.Services
 			}
 		}
 
-		#endregion
+		#endregion private
 
 		#region public
-		public IList<T> GetInstancesByBaseType<T>() where T : RestaurantBase
+
+		public IList<T> GetInstancesByBaseType<T>() where T : ARestaurant
 		{
 			var type = typeof(T);
 			return Assembly.GetExecutingAssembly().GetTypes()
@@ -79,6 +80,7 @@ namespace LunchTime.Services
 					.Select(t => (T)Activator.CreateInstance(t))
 					.ToList();
 		}
+
 		public IList<LunchMenu> GetMenus()
 		{
 			Refresh();
@@ -96,6 +98,7 @@ namespace LunchTime.Services
 				}
 			}
 		}
-		#endregion
+
+		#endregion public
 	}
 }

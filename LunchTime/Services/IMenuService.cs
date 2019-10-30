@@ -6,7 +6,8 @@ namespace LunchTime.Services
 {
 	public interface IMenuService
 	{
-		IList<T> GetInstancesByBaseType<T>() where T : RestaurantBase;
+		IList<T> GetInstancesByBaseType<T>() where T : ARestaurant;
+
 		IList<LunchMenu> GetMenus();
 	}
 }

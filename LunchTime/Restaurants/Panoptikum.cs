@@ -8,7 +8,7 @@ using LunchTime.Models;
 
 namespace LunchTime.Restaurants
 {
-	public class Panoptikum : RestaurantBase
+	public class Panoptikum : ARestaurant
 	{
 		public override string Name => "Panoptikum";
 

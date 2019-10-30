@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using HtmlAgilityPack;
+using LunchTime.Enums;
 using LunchTime.Models;
 
 namespace LunchTime.Restaurants
 {
-	public abstract class MenuBrnoBase : RestaurantBase
+	public abstract class ABrnoRestaurant : ARestaurant
 	{
-		protected abstract int[] SoupLinesPositions { get; }
+		protected virtual int[] SoupLinesPositions => new[] { 1 };
 
-		protected abstract int FirstMealLinesPositions { get; }
+		protected virtual int FirstMealLinesPositions => 2;
+		public override CityEnum City => CityEnum.Brno;
+		public override string Web => "";
 
 		public override LunchMenu Get()
 		{

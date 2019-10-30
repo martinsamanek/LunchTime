@@ -8,7 +8,7 @@ using LunchTime.Models;
 
 namespace LunchTime.Restaurants
 {
-	public class Freeland : RestaurantBase
+	public class Freeland : ARestaurant
 	{
 		public override string Name => "Freeland";
 
@@ -26,6 +26,7 @@ namespace LunchTime.Restaurants
 			var menu = web.DocumentNode.SelectNodes("//div[@id=\"daily\"]/div[1]/div[@class=\"half\"]")[0];
 			return Create(GetDailyMenusForWeek(menu));
 		}
+
 		//*[@id="daily"]/div[2]/div[1]
 		private static List<DailyMenu> GetDailyMenusForWeek(HtmlNode menu)
 		{
@@ -51,6 +52,7 @@ namespace LunchTime.Restaurants
 			}
 			return dailyMenus;
 		}
+
 		private static List<Meal> GetMeals(HtmlNode day)
 		{
 			var mealsNodes = day.SelectNodes("./div").ToArray();
