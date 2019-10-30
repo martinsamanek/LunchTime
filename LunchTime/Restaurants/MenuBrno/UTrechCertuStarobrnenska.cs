@@ -4,7 +4,7 @@ namespace LunchTime.Restaurants.TODO
 {
 	public class UTrechCertuStarobrnenska : ABrnoRestaurant
 	{
-		public override string Name => "U třech Čertu (Starobrněnská)";
+		public override string Name => "U Třech Čertů (Starobrněnská)";
 
 		public override string Url => "https://menubrno.cz/restaurace/0232-u-trech-Certu/";
 

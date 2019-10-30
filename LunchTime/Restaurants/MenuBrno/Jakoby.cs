@@ -10,8 +10,8 @@ namespace LunchTime.Restaurants.MenuBrno
 
 		public override GeoCoordinate Location => new GeoCoordinate(49.1970253, 16.6086578);
 
-		protected override int[] SoupLinesPositions => new[] { 3 };
+		protected override int[] SoupLinesPositions => new[] { 2 };
 
-		protected override int FirstMealLinesPositions => 5;
+		protected override int FirstMealLinesPositions => 4;
 	}
 }
