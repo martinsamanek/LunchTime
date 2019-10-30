@@ -1,0 +1,58 @@
+﻿x-restaurants {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+x-restaurant {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	flex-basis: 400px;
+	flex-grow: 1;
+}
+
+x-restaurant-menuweb {
+	font-size: 13px;
+}
+
+x-restaurant-menuweb {
+	&:before {
+		Content: "( ";
+	}
+
+	&:after {
+		Content: " )";
+	}
+}
+
+x-restaurant-name {
+	font-size: 18px;
+	color: #3e759f;
+}
+
+x-restaurant-soups {
+	display: block;
+
+	ul {
+		list-style-type: none;
+
+		li {
+			color: #cb6e2c;
+
+			&:before {
+				Content: "Polévka: ";
+			}
+		}
+	}
+}
+
+a.js-bookmark {
+	height: 17px;
+	width: 17px;
+	cursor: pointer;
+}
+
+a.map-marker {
+	text-decoration: none;
+}

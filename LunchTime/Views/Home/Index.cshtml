@@ -3,6 +3,7 @@
 	var columnSize = 4;
 	var itemsPerColumn = 12 / columnSize;
 }
+@using System.Globalization
 @model LunchMenus
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -15,17 +16,18 @@
 	</form>
 </nav>
 
-@for (var c = 0; c < Model.Menus.Count; c = c + itemsPerColumn)
-{
-	<div class="row">
-		@{for (var m = 0; m < itemsPerColumn && m + c < Model.Menus.Count; m++)
-			{
-				<div class="col-md-@(columnSize)">
-					@{ Html.RenderPartial("_Menu", Model.Menus[m + c]); }
-				</div>
-			}}
-	</div>
-}
+
+Dnes je: <strong>@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek) (@DateTime.Today.ToShortDateString())</strong>
+
+<x-restaurants>
+	@for (var c = 0; c < Model.Menus.Count; c = c + itemsPerColumn)
+	{
+		for (var m = 0; m < itemsPerColumn && m + c < Model.Menus.Count; m++)
+		{
+			Html.RenderPartial("_Menu", Model.Menus[m + c]);
+		}
+	}
+</x-restaurants>
 
 @section scripts {
 	<script src="~/js/lunchtime.js"></script>

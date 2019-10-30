@@ -1,36 +1,44 @@
-﻿@using System.Globalization
-@model PersonalizedLunchMenu
+﻿@model PersonalizedLunchMenu
 
-<h2>
-	<a href="@Model.Menu.Url" target="_blank">@Model.Menu.RestaurantName</a>
+<x-restaurant>
+	<x-restaurant-name>
+		<a class="js-bookmark bookmark-link @(Model.Bookmarked ? "bookmarked" : "")" data-id="@Model.Menu.Id"></a>
+		<a href="@Model.Menu.Location.GetUrl()" target="_blank" class="map-marker">
+			<img src="~/Images/map_marker.svg" alt="Map marker" title="@(Model.Menu.DistanceFromOffice) meters away" class="map-marker">
+		</a>
+		@Model.Menu.RestaurantName
+		<x-restaurant-menuweb>
+			<a href="@Model.Menu.Url" target="_blank">menu na webu</a>
+			@{
+				if (!string.IsNullOrEmpty(Model.Menu.Web))
+				{
+					<a href="@Model.Menu.Web" target="_blank">| web</a>
+				}
+			}
+		</x-restaurant-menuweb>
+	</x-restaurant-name>
 	@{
-		if (!string.IsNullOrEmpty(Model.Menu.Web))
+		var menu = Model.Menu.DailyMenus.OrderBy(x => x.Date).FirstOrDefault(m => m.Date.Date >= DateTime.Now.Date);
+		if (menu != null)
 		{
-			<a href="@Model.Menu.Web" target="_blank"> (web)</a>
+			<x-restaurant-menu>
+				<x-restaurant-soups>
+					<ul>
+						@foreach (var soup in menu.Soups)
+						{
+							<li>@soup.Name.Replace("&nbsp;", " ").Replace("&amp;", "&")</li>
+						}
+					</ul>
+				</x-restaurant-soups>
+				<x-restaurant-meals>
+					<ol>
+						@foreach (var meal in menu.Meals)
+						{
+							<li>@meal.Name.Replace("&nbsp;", " ").Replace("&amp;", "&") @meal.Price</li>
+						}
+					</ol>
+				</x-restaurant-meals>
+			</x-restaurant-menu>
 		}
 	}
-	<a href="@Model.Menu.Location.GetUrl()" target="_blank">
-		<img src="~/Images/map_marker.svg" alt="Map marker" title="@(Model.Menu.DistanceFromOffice) meters away" class="map-marker">
-	</a>
-	<a class="js-bookmark bookmark-link @(Model.Bookmarked ? "bookmarked" : "")" data-id="@Model.Menu.Id"></a>
-</h2>
-@{
-	var menu = Model.Menu.DailyMenus.OrderBy(x => x.Date).FirstOrDefault(m => m.Date.Date >= DateTime.Now.Date);
-	if (menu != null)
-	{
-		<h4>@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(menu.Date.DayOfWeek) (@menu.Date.ToShortDateString())</h4>
-		<ul>
-			@foreach (var soup in menu.Soups)
-			{
-				<li>@soup.Name.Replace("&nbsp;", " ").Replace("&amp;", "&")</li>
-			}
-		</ul>
-
-		<ol>
-			@foreach (var meal in menu.Meals)
-			{
-				<li>@meal.Name.Replace("&nbsp;", " ").Replace("&amp;", "&") @meal.Price</li>
-			}
-		</ol>
-	}
-}
+</x-restaurant>
