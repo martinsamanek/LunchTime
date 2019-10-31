@@ -15,9 +15,7 @@
 		</div>
 	</form>
 </nav>
-
-
-Dnes je: <strong>@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek) (@DateTime.Today.ToShortDateString())</strong>
+<div>Dnes je: <strong>@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(DateTime.Today.DayOfWeek) (@DateTime.Today.ToShortDateString())</strong></div>
 
 <x-restaurants>
 	@for (var c = 0; c < Model.Menus.Count; c = c + itemsPerColumn)

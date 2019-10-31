@@ -10,9 +10,8 @@ namespace LunchTime.Restaurants
 {
 	public abstract class ABrnoRestaurant : ARestaurant
 	{
-		protected virtual int[] SoupLinesPositions => new[] { 1 };
-
-		protected virtual int FirstMealLinesPositions => 2;
+		protected virtual uint[] SoupLinesPositions => new[] { 1U };
+		protected virtual uint FirstMealLinesPositions => 2;
 		public override CityEnum City => CityEnum.Brno;
 		public override string Web => "";
 
@@ -21,7 +20,10 @@ namespace LunchTime.Restaurants
 			var web = Fetch();
 			var menuContainer = web.DocumentNode.SelectNodes("//div[@itemscope][@itemtype=\"http://schema.org/Restaurant\"]")[0];
 			var tables = menuContainer.SelectNodes("//table").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains(" menu "));
-			var menu = tables.Single();
+
+			// If restaurant has too many meals, there are two tables
+			// TODO: Kišš - Merge tables into one and skip last TR in first table where "Zobrazit více" button is
+			var menu = tables.First();
 			return Create(GetDailyMenus(menu));
 		}
 
@@ -32,10 +34,11 @@ namespace LunchTime.Restaurants
 
 			for (var i = 0; i < days.Length; i++)
 			{
-				var dailyMenu = new DailyMenu(DateTime.Now);
-				dailyMenu.Soups = GetSoups(days[i]);
-				dailyMenu.Meals = GetMeals(days[i]);
-				dailyMenus.Add(dailyMenu);
+				dailyMenus.Add(new DailyMenu(DateTime.Now)
+				{
+					Soups = GetSoups(days[i]),
+					Meals = GetMeals(days[i])
+				});
 			}
 
 			return dailyMenus;
@@ -57,23 +60,20 @@ namespace LunchTime.Restaurants
 		private List<Meal> GetMeals(HtmlNode day)
 		{
 			var meals = new List<Meal>();
+			var mealNodes = day.SelectNodes(".//tr");
 
-			//foreach (var mealLinePosition in MealLinesPositions)
-			//{
-			//    var meal = GetMeal(day.SelectNodes($".//tr[{mealLinePosition}]")[0]);
-			//    meals.Add(meal);
-			//}
-
-			for (int i = FirstMealLinesPositions; i < int.MaxValue; i++)
+			HtmlNode mealNode;
+			for (var i = (int)FirstMealLinesPositions - 1; i < mealNodes.Count(); i++)
 			{
-				var mealNode = day.SelectNodes($".//tr[{i}]");
-
-				if (mealNode == null || !mealNode[0].HasChildNodes)
-				{
+				mealNode = mealNodes[i];
+				if (!mealNode.HasChildNodes)
 					break;
-				}
 
-				var meal = GetMeal(mealNode[0]);
+				var button = mealNode.SelectNodes(".//td/button");
+				if (button != null)
+					break;
+
+				var meal = GetMeal(mealNode);
 				meals.Add(meal);
 			}
 
@@ -87,9 +87,7 @@ namespace LunchTime.Restaurants
 
 			mealName = Regex.Replace(mealName, @"^[0-9]\.", "");
 
-			var meal = new Meal(mealName, mealPrice);
-
-			return meal;
+			return new Meal(mealName, mealPrice);
 		}
 	}
 }

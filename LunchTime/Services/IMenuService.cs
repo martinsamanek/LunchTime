@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
+using LunchTime.Enums;
 using LunchTime.Models;
-using LunchTime.Restaurants;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LunchTime.Services
 {
 	public interface IMenuService
 	{
-		IList<T> GetInstancesByBaseType<T>() where T : ARestaurant;
+		IList<SelectListItem> GetCities();
 
-		IList<LunchMenu> GetMenus();
+		IList<PersonalizedLunchMenu> GetPersonalizedMenus(CityEnum? city, IList<string> bookmarkedIds);
 	}
 }

@@ -17,9 +17,6 @@ namespace LunchTime.Services
 			return Math.Truncate(distanceInMeters);
 		}
 
-		private static GeoCoordinate GetOfficeGeoCoordinate(CityEnum city)
-		{
-			return city == CityEnum.Brno ? _brnoOfficeLocation : _olomoucOfficeLocation;
-		}
+		private static GeoCoordinate GetOfficeGeoCoordinate(CityEnum city) => city == CityEnum.Brno ? _brnoOfficeLocation : _olomoucOfficeLocation;
 	}
 }

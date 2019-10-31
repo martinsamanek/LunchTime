@@ -9,8 +9,8 @@ namespace LunchTime.Restaurants.TODO
 		public override string Url => "https://menubrno.cz/restaurace/0231-u-trech-Certu/";
 
 		public override GeoCoordinate Location => new GeoCoordinate(49.1961267, 16.6107650);
-		protected override int[] SoupLinesPositions => new[] { 2 };
+		protected override uint[] SoupLinesPositions => new[] { 2U };
 
-		protected override int FirstMealLinesPositions => 3;
+		protected override uint FirstMealLinesPositions => 3;
 	}
 }

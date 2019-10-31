@@ -5,9 +5,9 @@ using LunchTime.Models;
 
 namespace LunchTime.Restaurants.TODO
 {
-	public class Gusto : ARestaurant
+	public class VivobeneGusto : ARestaurant
 	{
-		public override string Name => "Gusto vivobene";
+		public override string Name => "Vivobene Gusto";
 
 		public override string Url => "http://www.vivobene-gusto.cz/obedove-menu";
 

@@ -6,7 +6,7 @@ namespace LunchTime
 	{
 		public static T? ToEnum<T>(this string value, T? defaultValue = null) where T : struct
 		{
-			T? result = defaultValue;
+			var result = defaultValue;
 			var typeAsString = typeof(T).ToString();
 
 			if (string.IsNullOrEmpty(value) || !typeof(T).IsEnum)

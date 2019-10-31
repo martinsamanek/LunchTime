@@ -5,9 +5,7 @@
 		<a class="js-bookmark bookmark-link @(Model.Bookmarked ? "bookmarked" : "")" data-id="@Model.Menu.Id"></a>
 		<a href="@Model.Menu.Location.GetUrl()" target="_blank" class="map-marker">
 			<img src="~/Images/map_marker.svg" alt="Map marker" title="@(Model.Menu.DistanceFromOffice) meters away" class="map-marker">
-		</a>
-		@Model.Menu.RestaurantName
-		<x-restaurant-menuweb>
+		</a>@Model.Menu.RestaurantName<x-restaurant-menuweb>
 			<a href="@Model.Menu.Url" target="_blank">menu na webu</a>
 			@{
 				if (!string.IsNullOrEmpty(Model.Menu.Web))
