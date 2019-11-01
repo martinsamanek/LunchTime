@@ -9,6 +9,8 @@ namespace LunchTime.Restaurants
 {
     public abstract class RestaurantBase
     {
+        public const string CURRENCY_SUFFIX = "Kč";
+
         public string Id => GetType().Name;
 
         public abstract string Name { get; }

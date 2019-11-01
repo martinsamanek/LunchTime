@@ -3,12 +3,13 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LunchTime.Interfaces;
 using LunchTime.Models;
 using LunchTime.Shared;
 
 namespace LunchTime.Restaurants
 {
-    public class MenusProvider
+    public class MenusProvider : IMenusProvider
     {
         /* 
         // Not needed loaded automatically with reflection see CreateMenus method.
@@ -39,7 +40,7 @@ namespace LunchTime.Restaurants
         private IList<LunchMenu> _menusCache;
 
         private readonly object _lock = new object();
-        
+
         private static IList<LunchMenu> CreateMenus()
         {
             var menus = new ConcurrentBag<LunchMenu>();
@@ -78,7 +79,7 @@ namespace LunchTime.Restaurants
         {
             lock (_lock)
             {
-                if (_lastRefreshDate != DateTime.Today 
+                if (_lastRefreshDate != DateTime.Today
                     || _menusCache == null)
                 {
                     _lastRefreshDate = DateTime.Today;

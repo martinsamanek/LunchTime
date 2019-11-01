@@ -31,20 +31,46 @@ namespace LunchTime.Restaurants
             var items = menu.SelectNodes(".//tr").ToArray();
             var dailyMenus = new List<DailyMenu>();
             int day = 0;
-            for (var i = 0; i < items.Length; i = i + 7)
+            int sequence;
+            for (var i = 0; i < items.Length; i = i + sequence)
             {
                 var dailyMenu = new DailyMenu(StartOfWeek().AddDays(day));
-                var soups = GetSoups(items[i+1]);
+                var soups = GetSoups(items[i + 1]);
                 if (string.IsNullOrEmpty(soups.First().Name))
                 {
                     break;
                 }
                 dailyMenu.Soups = soups;
-                dailyMenu.Meals = GetMeals(new[] { items[i + 2], items[i + 3], items[i+4], items[i+5], items[i + 6] });
+                dailyMenu.Meals = GetMeals(PrepareMealNodes(items, i + 2));
                 dailyMenus.Add(dailyMenu);
+                sequence = dailyMenu.Meals.Count + 2;
                 day++;
             }
             return dailyMenus;
+        }
+
+        private static HtmlNode[] PrepareMealNodes(HtmlNode[] allMealsNodes, int currentIndex)
+        {
+            int maxOfMealItemsPerDay = 10;
+            List<HtmlNode> output = new List<HtmlNode>();
+            for (int i = currentIndex; i < currentIndex + maxOfMealItemsPerDay; i++)
+            {
+                if (i == allMealsNodes.Length)
+                {
+                    break;
+                }
+
+                var node = allMealsNodes[i];
+
+                if (node.SelectNodes(".//td").Count < 3)
+                {
+                    break;
+                }
+
+                output.Add(node);
+            }
+
+            return output.ToArray();
         }
 
         private static List<Meal> GetMeals(HtmlNode[] items)

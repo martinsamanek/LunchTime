@@ -71,10 +71,15 @@ namespace LunchTime.Restaurants
         {
             var mealString = mealNode.InnerHtml;
             var priceIndex = mealString.LastIndexOf(' ');
-            var mealName = mealString.Substring(2, priceIndex + 2);
-            var mealPrice = string.Empty;
+            var mealName = IsNumber(mealString.Substring(priceIndex).Trim()) ? mealString.Substring(2, priceIndex - 2) : mealString;
+            var mealPrice = IsNumber(mealString.Substring(priceIndex).Trim()) ? $"{mealString.Substring(priceIndex).Trim()} {CURRENCY_SUFFIX}" : string.Empty;
             var meal = new Meal(mealName, mealPrice);
             return meal;
+        }
+
+        private static bool IsNumber(string value)
+        {
+            return int.TryParse(value, out int n);
         }
     }
 }

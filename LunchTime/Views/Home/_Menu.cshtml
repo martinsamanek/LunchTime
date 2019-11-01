@@ -20,18 +20,23 @@
     if (menu != null)
     {
         <h4>@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(menu.Date.DayOfWeek) (@menu.Date.ToShortDateString())</h4>
-        <ul>
+        <table class="table table-hover">
+            <tbody>
             @foreach (var soup in menu.Soups)
             {
-                <li>@soup.Name.Replace("&nbsp;", " ").Replace("&amp;", "&")</li>
+                <tr>
+                    <td>@soup.Name.Replace("&nbsp;", " ").Replace("&amp;", "&")</td>
+                    <td class="col-md-2"></td>
+                </tr>
             }
-        </ul>
-
-        <ol>
             @foreach (var meal in menu.Meals)
             {
-                <li>@meal.Name.Replace("&nbsp;", " ").Replace("&amp;", "&") @meal.Price</li>
+                <tr>
+                    <td>@meal.Name.Replace("&nbsp;", " ").Replace("&amp;", "&")</td>
+                    <td class="col-md-2">@meal.Price</td>
+                </tr>
             }
-        </ol>
+            </tbody>
+        </table>
     }
 }
