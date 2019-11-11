@@ -1,6 +1,8 @@
 ﻿using LunchTime.Interfaces;
 using LunchTime.Managers;
 using LunchTime.Restaurants;
+using LunchTime.Restaurants.TODO;
+using LunchTime.Zomato;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -34,6 +36,8 @@ namespace LunchTime
             services.AddSingleton<IMenusProvider, MenusProvider>();
             services.AddSingleton<ILunchProvider, LunchProvider>();
 
+            services.AddZomato(Configuration);
+           
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -61,6 +65,8 @@ namespace LunchTime
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.InitZomato();
         }
     }
 }
