@@ -1,10 +1,10 @@
-﻿using LunchTime.Models;
-using System;
-using GeoCoordinatePortable;
+﻿using GeoCoordinatePortable;
+using LunchTime.Models;
+using LunchTime.Zomato;
 
-namespace LunchTime.Restaurants.TODO
+namespace LunchTime.Restaurants.MenuBrno
 {
-    public class UTrechCertu : RestaurantBase
+    public class UTrechCertu : ZomatoApiRestaurantBase
     {
         public override string Name => "U trech certu";
 
@@ -16,9 +16,6 @@ namespace LunchTime.Restaurants.TODO
 
         public override City City => City.Brno;
 
-        public override LunchMenu Get()
-        {
-            throw new NotImplementedException();
-        }
+        public override int ZomatoRestaurantId => 16507255;
     }
 }

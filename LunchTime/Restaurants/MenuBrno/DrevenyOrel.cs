@@ -1,10 +1,10 @@
-﻿using LunchTime.Models;
-using System;
-using GeoCoordinatePortable;
+﻿using GeoCoordinatePortable;
+using LunchTime.Models;
+using LunchTime.Zomato;
 
-namespace LunchTime.Restaurants.TODO
+namespace LunchTime.Restaurants.MenuBrno
 {
-    public class DrevenyOrel : RestaurantBase
+    public class DrevenyOrel : ZomatoApiRestaurantBase
     {
         public override string Name => "U Dreveneho Orla";
 
@@ -16,9 +16,6 @@ namespace LunchTime.Restaurants.TODO
 
         public override City City => City.Brno;
 
-        public override LunchMenu Get()
-        {
-            throw new NotImplementedException();
-        }
-   }
+        public override int ZomatoRestaurantId => 16506896;
+    }
 }
