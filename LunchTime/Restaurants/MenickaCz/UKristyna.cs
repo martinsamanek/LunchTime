@@ -15,7 +15,7 @@ namespace LunchTime.Restaurants.MenickaCz
 
         public override string Web => "";
 
-        public override GeoCoordinate Location => new GeoCoordinate(0, 0);
+        public override GeoCoordinate Location => new GeoCoordinate(49.5965216, 17.2609383);
 
         public override City City => City.Olomouc;
     }
