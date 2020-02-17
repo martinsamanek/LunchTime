@@ -15,7 +15,7 @@ namespace LunchTime.Restaurants.MenickaCz
 
         public override string Web => "";
 
-        public override GeoCoordinate Location => new GeoCoordinate(0, 0);
+        public override GeoCoordinate Location => new GeoCoordinate(49.1962967, 16.6088886);
 
         public override City City => City.Brno;
     }
