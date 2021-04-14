@@ -1,4 +1,5 @@
-﻿@using LunchTime.Shared
+﻿@using LunchTime.Managers
+@using LunchTime.Models
 @model LunchMenus
 
 @{
@@ -33,7 +34,7 @@
     <script src="~/js/lunchtime.js"></script>
     <script>
         $(document).ready(function () {
-            init(@SerializationHelper.JsSerializeHtml(Constants.BookmarkedCookieName), @SerializationHelper.JsSerializeHtml(Constants.SelectedCityCookieName));
+            init(@SerializationHelper.JsSerializeHtml(EnvConfig.BookmarkedCookieName), @SerializationHelper.JsSerializeHtml(EnvConfig.SelectedCityCookieName));
         });
     </script>
 }

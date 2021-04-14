@@ -1,19 +1,25 @@
 ﻿using LunchTime.Interfaces;
 using LunchTime.Managers;
-using LunchTime.Restaurants;
-using LunchTime.Restaurants.TODO;
-using LunchTime.Zomato;
+using LunchTime.Services.Zomato.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using LunchTime.Services.HtmlGetServices;
+using System.IO.Compression;
+using Microsoft.AspNetCore.ResponseCompression;
+using Serilog;
+using System.Threading.Tasks;
 
 namespace LunchTime
 {
     public class Startup
     {
+        private ILunchManager _iLunchManager;
+        private IHttpClientService _iHttpClientService;
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -25,6 +31,11 @@ namespace LunchTime
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpContextAccessor();
+            services.AddResponseCompression();
+            services.Configure<GzipCompressionProviderOptions>(options =>
+            {
+                options.Level = CompressionLevel.Optimal;
+            });            
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -33,8 +44,12 @@ namespace LunchTime
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddSingleton<IMenusProvider, MenusProvider>();
-            services.AddSingleton<ILunchProvider, LunchProvider>();
+            services.AddSingleton<IMenusManager, MenusManager>();
+            services.AddSingleton<ILunchManager, LunchManager>();
+            services.AddSingleton<IHttpClientService, HttpClientService>();
+            services.AddSingleton(Log.Logger);
+
+            EnvConfig.SetupConfiguration(Configuration);
 
             services.AddZomato(Configuration);
            
@@ -55,6 +70,7 @@ namespace LunchTime
                 app.UseHsts();
             }
 
+            app.UseResponseCompression();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -67,6 +83,26 @@ namespace LunchTime
             });
 
             app.InitZomato();
+
+            Task task = new Task(async () =>
+            {                
+                var iMenusManager = app.ApplicationServices.GetService(typeof(IMenusManager)) as IMenusManager;
+                await iMenusManager.DoHourlyCallAsync().ConfigureAwait(false);
+            });
+
+            task.Start();
+        }
+
+        private void OnAppStarted()
+        {
+            Log.Information("Application has started.");
+            Log.CloseAndFlush();            
+        }
+
+        private void OnAppStopped()
+        {
+            Log.Information("Application has stopped.");
+            Log.CloseAndFlush();
         }
     }
 }
