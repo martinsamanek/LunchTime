@@ -1,30 +1,21 @@
-﻿using LunchTime.Interfaces;
-using LunchTime.Models;
+﻿using System.Threading.Tasks;
+using LunchTime.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LunchTime.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IMenusProvider _menusProvider;
-        private readonly ILunchProvider _lunchManager;
+        private readonly IMenusManager _menusManager;
 
-        public HomeController(IMenusProvider menusProvider, ILunchProvider lunchManager)
+        public HomeController(IMenusManager menusManager)
         {
-            _menusProvider = menusProvider;
-            _lunchManager = lunchManager;
+            _menusManager = menusManager;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var model = GetModel();
-            return View(model);
-        }
-
-        private LunchMenus GetModel()
-        {
-            var menus = _menusProvider.GetMenus();
-            return _lunchManager.GetLunchMenus(menus);
+            return View(await _menusManager.GetMenusAsync().ConfigureAwait(false));
         }
     }
 }

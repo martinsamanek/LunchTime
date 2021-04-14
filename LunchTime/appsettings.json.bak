@@ -8,54 +8,18 @@
   "Zomato": {
     "ApiKey": "f5a7b81916c9e7465241b6bb78ed3408"
   },
-
-  "BookmarkedCookieName": "bookmarked",
-  "SelectedCityCookieName": "selectedCity",
-  "LunchMenuSyncWaitTimeInMinutes":  60,
-
-  "Serilog": {
-    "Using": [],
-    "WriteTo": [
-      {
-        "Name": "File",
-        "Args": {
-          "path": "log.txt",
-          "rollingInterval": "Day",
-          "flushToDiskInterval": "00:00:01",
-          "shared": "true",
-          "retainedFileCountLimit": "14"
-        }
-      }
-    ],
-    "MinimumLevel": {
-      "Default": "Information",
-      "Override": {
-        "Microsoft": "Warning",
-        "System": "Warning"
-      }
-    }
-  },
-
+  
   "//I'd move this to database, but for sake of demo i'll leave it just there": "",
 
   "Restaurants": [
     {
-      "Type": "SaintPatrick",
-      "Name": "Saint Patrick Pub",
-      "Url": "http://saintpatrickpub.cz/dennni-menu/",
-      "Web": "",
-      "Lat": 49.1962775,
-      "Long": 16.6082878,
-      "City": "Brno"
-    },
-    {
-      "Type": "Panoptikum",
-      "Name": "Panoptikum",
-      "Url": "http://www.restaurace-panoptikum.cz/denni-menu.html",
-      "Web": "",
-      "Lat": 49.1965522,
-      "Long": 16.6072025,
-      "City": "Brno"
+      "Type": "MenickaCz",
+      "Name": "Goool",
+      "Url": "https://www.menicka.cz/5629.html",
+      "Web": "http://www.restauracegol.eu/",
+      "Lat": 49.6005185,
+      "Long": 17.2489384,
+      "City": "Olomouc"
     },
     {
       "Type": "MenickaCz",

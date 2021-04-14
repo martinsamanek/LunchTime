@@ -1,0 +1,246 @@
+2021-04-10 12:59:47.479 +02:00 [INF] Configuring web host ({ApplicationContext})...
+2021-04-10 12:59:49.659 +02:00 [INF] Starting hourly menu sync.
+2021-04-10 12:59:51.395 +02:00 [ERR] Failed to load reastaurant menu for: Panoptikum
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.PanoptikumHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\PanoptikumHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:51.396 +02:00 [ERR] Failed to load reastaurant menu for: Saint Patrick Pub
+System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at LunchTime.Services.HtmlGetServices.SaintPatrickHtmlGetService.GetDailyMenus(HtmlNode menu) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\SaintPatricktHtmlGetService.cs:line 31
+   at LunchTime.Services.HtmlGetServices.SaintPatrickHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\SaintPatricktHtmlGetService.cs:line 26
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:51.396 +02:00 [ERR] Failed to load reastaurant menu for: Saint Patrick Pub
+System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at LunchTime.Services.HtmlGetServices.SaintPatrickHtmlGetService.GetDailyMenus(HtmlNode menu) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\SaintPatricktHtmlGetService.cs:line 31
+   at LunchTime.Services.HtmlGetServices.SaintPatrickHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\SaintPatricktHtmlGetService.cs:line 26
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:51.395 +02:00 [ERR] Failed to load reastaurant menu for: Panoptikum
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.PanoptikumHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\PanoptikumHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:51.756 +02:00 [ERR] Failed to load reastaurant menu for: Charlies square
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:52.055 +02:00 [ERR] Failed to load reastaurant menu for: Pivní opice
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:52.397 +02:00 [ERR] Failed to load reastaurant menu for: Da Vinci Restaurant & Caffe Bar
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:52.555 +02:00 [ERR] Failed to load reastaurant menu for: Baroko
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:52.682 +02:00 [ERR] Failed to load reastaurant menu for: Jakoby
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:52.816 +02:00 [ERR] Failed to load reastaurant menu for: Baroko
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:53.070 +02:00 [ERR] Failed to load reastaurant menu for: Charlies square
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:53.102 +02:00 [ERR] Failed to load reastaurant menu for: Jakoby
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:53.255 +02:00 [ERR] Failed to load reastaurant menu for: Starobrněnská Pivnice Na Divadelní
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:53.355 +02:00 [ERR] Failed to load reastaurant menu for: Da Vinci Restaurant & Caffe Bar
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:53.513 +02:00 [ERR] Failed to load reastaurant menu for: Spolek
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:53.527 +02:00 [ERR] Failed to load reastaurant menu for: Starobrněnská Pivnice Na Divadelní
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:53.810 +02:00 [ERR] Failed to load reastaurant menu for: Štatl
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:53.950 +02:00 [ERR] Failed to load reastaurant menu for: Štatl
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:54.021 +02:00 [ERR] Failed to load reastaurant menu for: Zelená Kočka
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:54.041 +02:00 [ERR] Failed to load reastaurant menu for: Pivní opice
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:54.135 +02:00 [ERR] Failed to load reastaurant menu for: Spolek
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 12:59:54.463 +02:00 [ERR] Failed to load reastaurant menu for: Zelená Kočka
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 111
+2021-04-10 13:01:01.933 +02:00 [INF] Configuring web host ({ApplicationContext})...
+2021-04-10 13:01:04.136 +02:00 [INF] Starting hourly menu sync.
+2021-04-10 13:01:05.745 +02:00 [ERR] Failed to load reastaurant menu for: Panoptikum
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.PanoptikumHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\PanoptikumHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:05.747 +02:00 [ERR] Failed to load reastaurant menu for: Saint Patrick Pub
+System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at LunchTime.Services.HtmlGetServices.SaintPatrickHtmlGetService.GetDailyMenus(HtmlNode menu) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\SaintPatricktHtmlGetService.cs:line 31
+   at LunchTime.Services.HtmlGetServices.SaintPatrickHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\SaintPatricktHtmlGetService.cs:line 26
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:05.747 +02:00 [ERR] Failed to load reastaurant menu for: Saint Patrick Pub
+System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at LunchTime.Services.HtmlGetServices.SaintPatrickHtmlGetService.GetDailyMenus(HtmlNode menu) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\SaintPatricktHtmlGetService.cs:line 31
+   at LunchTime.Services.HtmlGetServices.SaintPatrickHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\SaintPatricktHtmlGetService.cs:line 26
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:05.745 +02:00 [ERR] Failed to load reastaurant menu for: Panoptikum
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.PanoptikumHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\PanoptikumHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:06.284 +02:00 [ERR] Failed to load reastaurant menu for: Baroko
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:06.504 +02:00 [ERR] Failed to load reastaurant menu for: Pivní opice
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:06.813 +02:00 [ERR] Failed to load reastaurant menu for: Charlies square
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:07.148 +02:00 [ERR] Failed to load reastaurant menu for: Da Vinci Restaurant & Caffe Bar
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:07.470 +02:00 [ERR] Failed to load reastaurant menu for: Spolek
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:07.477 +02:00 [ERR] Failed to load reastaurant menu for: Jakoby
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:07.665 +02:00 [ERR] Failed to load reastaurant menu for: Da Vinci Restaurant & Caffe Bar
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:07.729 +02:00 [ERR] Failed to load reastaurant menu for: Spolek
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:08.133 +02:00 [ERR] Failed to load reastaurant menu for: Štatl
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:08.258 +02:00 [ERR] Failed to load reastaurant menu for: Zelená Kočka
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:08.265 +02:00 [ERR] Failed to load reastaurant menu for: Charlies square
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:08.326 +02:00 [ERR] Failed to load reastaurant menu for: Starobrněnská Pivnice Na Divadelní
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:08.329 +02:00 [ERR] Failed to load reastaurant menu for: Pivní opice
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:08.338 +02:00 [ERR] Failed to load reastaurant menu for: Baroko
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:08.339 +02:00 [ERR] Hourly sync failed
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Managers.LunchManager.GetSelectedCity() in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\LunchManager.cs:line 25
+   at LunchTime.Managers.LunchManager.GetLunchMenus(IList`1 menus)
+   at LunchTime.Managers.MenusManager.GetMenusAsync() in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 70
+   at LunchTime.Managers.MenusManager.DoHourlyCallAsync() in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 45
+2021-04-10 13:01:08.624 +02:00 [ERR] Failed to load reastaurant menu for: Štatl
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:08.632 +02:00 [ERR] Failed to load reastaurant menu for: Starobrněnská Pivnice Na Divadelní
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:08.903 +02:00 [ERR] Failed to load reastaurant menu for: Zelená Kočka
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:01:09.012 +02:00 [ERR] Failed to load reastaurant menu for: Jakoby
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 120
+2021-04-10 13:02:01.985 +02:00 [INF] Configuring web host ({ApplicationContext})...
+2021-04-10 13:02:05.207 +02:00 [ERR] Failed to load reastaurant menu for: Panoptikum
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.PanoptikumHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\PanoptikumHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 122
+2021-04-10 13:02:05.207 +02:00 [ERR] Failed to load reastaurant menu for: Saint Patrick Pub
+System.ArgumentNullException: Value cannot be null.
+Parameter name: source
+   at System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   at LunchTime.Services.HtmlGetServices.SaintPatrickHtmlGetService.GetDailyMenus(HtmlNode menu) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\SaintPatricktHtmlGetService.cs:line 31
+   at LunchTime.Services.HtmlGetServices.SaintPatrickHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\SaintPatricktHtmlGetService.cs:line 26
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 122
+2021-04-10 13:02:05.871 +02:00 [ERR] Failed to load reastaurant menu for: Da Vinci Restaurant & Caffe Bar
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 122
+2021-04-10 13:02:06.007 +02:00 [ERR] Failed to load reastaurant menu for: Štatl
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 122
+2021-04-10 13:02:06.219 +02:00 [ERR] Failed to load reastaurant menu for: Pivní opice
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 122
+2021-04-10 13:02:06.230 +02:00 [ERR] Failed to load reastaurant menu for: Baroko
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 122
+2021-04-10 13:02:06.481 +02:00 [ERR] Failed to load reastaurant menu for: Spolek
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 122
+2021-04-10 13:02:06.862 +02:00 [ERR] Failed to load reastaurant menu for: Starobrněnská Pivnice Na Divadelní
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 122
+2021-04-10 13:02:06.915 +02:00 [ERR] Failed to load reastaurant menu for: Zelená Kočka
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 122
+2021-04-10 13:02:07.008 +02:00 [ERR] Failed to load reastaurant menu for: Charlies square
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 122
+2021-04-10 13:02:07.112 +02:00 [ERR] Failed to load reastaurant menu for: Jakoby
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at LunchTime.Services.HtmlGetServices.MenuBrnoHtmlGetService.GetHtmlContentAsync(Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Services\HtmlGetServices\MenuBrnoHtmlGetService.cs:line 24
+   at LunchTime.Managers.MenusManager.AddMenuAsync(ConcurrentBag`1 menus, Restaurant restaurant) in E:\git\Telapoint.Git\lunchtime\LunchTime\Managers\MenusManager.cs:line 122
