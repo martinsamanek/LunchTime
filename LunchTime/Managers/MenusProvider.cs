@@ -70,11 +70,12 @@ namespace LunchTime.Managers
             catch (NotImplementedException e)
             {
                 _log.Info(e);
+                menus.Add(new LunchMenu(restaurant));
             }
             catch (Exception e)
             {
-                menus.Add(new LunchMenu(restaurant));
                 _log.Error($"Error while getting menus for restaurant {restaurant.Id}", e);
+                menus.Add(new LunchMenu(restaurant));
             }
         }
 
