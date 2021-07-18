@@ -21,19 +21,26 @@ namespace LunchTime.Restaurants
         public override LunchMenu Get()
         {
             var web = Fetch();
-            var menu = web.DocumentNode.SelectNodes("//*[@id=\"post-141\"]/div/div/div/div/div")[0];
-            return Create(GetDailyMenus(menu));
+            var menu = web?.DocumentNode?.SelectNodes("//*[@id=\"post-141\"]/div/div/div/div/div")?.FirstOrDefault();
+            if (menu != null)
+            {
+                return Create(GetDailyMenus(menu));
+            }
+
+            return new LunchMenu(this);
         }
 
         private static List<DailyMenu> GetDailyMenus(HtmlNode menu)
         {
-            var days = menu.SelectNodes(".//tbody").ToArray();
+            var days = menu?.SelectNodes(".//tbody")?.ToArray() ?? new HtmlNode[0];
             var dailyMenus = new List<DailyMenu>();
             for (var i = 0; i < days.Length; i++)
             {
-                var dailyMenu = new DailyMenu(StartOfWeek().AddDays(i));
-                dailyMenu.Soups = GetSoups(days[i]);
-                dailyMenu.Meals = GetMeals(days[i]);
+                var dailyMenu = new DailyMenu(StartOfWeek().AddDays(i))
+                {
+                    Soups = GetSoups(days[i]),
+                    Meals = GetMeals(days[i])
+                };
                 dailyMenus.Add(dailyMenu);
             }
             return dailyMenus;

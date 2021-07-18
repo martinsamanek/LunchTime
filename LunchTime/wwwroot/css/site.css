@@ -52,8 +52,8 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
+/* Override the default bootstrap behavior where horizontal description lists
+   will truncate terms that are too long to fit in the left column
 */
 .dl-horizontal dt {
     white-space: normal;
@@ -70,11 +70,16 @@ textarea {
     width: 24px;
     height: 24px;
     content: url(/Images/star_white.png);
+    cursor: pointer;
 }
 
     .bookmark-link.bookmarked {
         content: url(/Images/star_yellow.png);
     }
+
+.map-marker-link:hover {
+    text-decoration: none;
+}
 
 .map-marker {
     height: 20px;

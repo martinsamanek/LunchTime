@@ -10,7 +10,7 @@
             <a href="@Model.Menu.Web" target="_blank"> (web)</a>
         }
     }
-    <a href="@MapUrlHelper.GetUrl(Model.Menu.Location)" target="_blank">
+    <a href="@MapUrlHelper.GetUrl(Model.Menu.Location)" target="_blank" class="map-marker-link">
         <img src="~/Images/map_marker.svg" alt="Map marker" title="@(Model.Menu.DistanceFromOffice) meters away" class="map-marker">
     </a>
     <a class="js-bookmark bookmark-link @(Model.Bookmarked ? "bookmarked" : "")" data-id="@Model.Menu.Id"></a>

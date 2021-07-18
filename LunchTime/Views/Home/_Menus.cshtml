@@ -1,0 +1,19 @@
+﻿@model List<PersonalizedLunchMenu>;
+
+@{
+    var columnSize = 4;
+    var itemsPerColumn = 12 / columnSize;
+    var menus = Model;
+}
+
+@for (var c = 0; c < menus.Count; c = c + itemsPerColumn)
+{
+    <div class="row">
+        @{for (var m = 0; m < itemsPerColumn && m + c < menus.Count; m++)
+        {
+            <div class="col-md-@(columnSize)">
+                <partial name="_Menu" model="@menus[m + c]" />
+            </div>
+        }}
+    </div>
+}

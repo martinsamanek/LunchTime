@@ -1,4 +1,5 @@
-﻿using LunchTime.Interfaces;
+﻿using System.Text;
+using LunchTime.Interfaces;
 using LunchTime.Managers;
 using LunchTime.Restaurants;
 using LunchTime.Restaurants.TODO;
@@ -9,6 +10,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace LunchTime
 {
@@ -24,6 +27,7 @@ namespace LunchTime
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             services.AddHttpContextAccessor();
 
             services.Configure<CookiePolicyOptions>(options =>
@@ -33,11 +37,21 @@ namespace LunchTime
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            // proper logging
+            services.AddLogging(builder =>
+            {
+                builder.AddLog4Net();
+                builder.AddConfiguration(Configuration.GetSection("Logging"));
+                builder.AddConsole();
+            });
+
             services.AddSingleton<IMenusProvider, MenusProvider>();
-            services.AddSingleton<ILunchProvider, LunchProvider>();
+            // does not have to be singleton
+            services.AddTransient<ILunchProvider, LunchProvider>();
+            services.AddTransient<ICitiesProvider, CitiesProvider>();
 
             services.AddZomato(Configuration);
-           
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

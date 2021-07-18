@@ -14,13 +14,13 @@ function init(bookmarkCookieName, cityCookieName) {
 }
 
 function registerHandlers() {
-    $(BOOKMARK_LINK_SELECTOR).on('click',function() {
+    $(document).on('click',BOOKMARK_LINK_SELECTOR, function() {
         var $link = $(this);
         var id = $link.data(DATA_ID);
         var bookmarked = addOrRemoveBookmarked(id);
 
         $link.toggleClass(BOOKMARKED_CLASS, bookmarked.includes(id));
-        setBookmarkCookie(bookmarked);        
+        setBookmarkCookie(bookmarked);
     });
     $(CITY_SELECTOR).on('change', cityChanged);
 }
@@ -41,7 +41,7 @@ function setBookmarkCookie(bookmarkedArray) {
     if (bookmarkedArray.length === 0) {
         $.removeCookie(BOOKMARK_COOKIE_NAME);
         return;
-    }    
+    }
 
     $.cookie(BOOKMARK_COOKIE_NAME, JSON.stringify(bookmarkedArray), { expires: COOKIE_EXPIRATION_DAYS });
 }
@@ -59,4 +59,22 @@ function cityChanged() {
     var $citySelector = $(this);
     $.cookie(CITY_COOKIE_NAME, $citySelector.val(), { expires: COOKIE_EXPIRATION_DAYS });
     window.location.reload(true);
+}
+
+function loadData() {
+    const xhr = $.ajax({
+        cache: false,
+        type: 'GET',
+        url: '/Home/Menus',
+        success: (html) => {
+            const isLoaded = xhr.getResponseHeader('isLoaded');
+            console.log('headers', xhr.getAllResponseHeaders());
+            console.log('isLoaded header', isLoaded);
+            if (isLoaded === 'True' || isLoaded === 'true' ) {
+                $('#main').html(html);
+            } else {
+                setTimeout(() => loadData(), 200);
+            }
+        }
+    });
 }

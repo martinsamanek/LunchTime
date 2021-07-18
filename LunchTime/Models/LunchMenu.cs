@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GeoCoordinatePortable;
+using LunchTime.Restaurants;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LunchTime.Models
 {
     public class LunchMenu
     {
-        public LunchMenu(string id, string restaurantName, string restaurantUrl, string web, IList<DailyMenu> dailyMenu, GeoCoordinate location, double distanceFromOffice, City city)
+        public LunchMenu(string id, string restaurantName, string restaurantUrl, string web, IList<DailyMenu> dailyMenu, GeoCoordinate location, double distanceFromOffice, City? city)
         {
             Id = id;
             RestaurantName = restaurantName;
@@ -19,8 +21,21 @@ namespace LunchTime.Models
             City = city;
         }
 
-        public LunchMenu(string id, string restaurantName, string restaurantUrl, string web, GeoCoordinate location, double distanceFromOffice, City city) : 
+        public LunchMenu(string id, string restaurantName, string restaurantUrl, string web, GeoCoordinate location, double distanceFromOffice, City? city) :
             this(id, restaurantName, restaurantUrl, web, new List<DailyMenu>(), location, distanceFromOffice, city)
+        {
+        }
+
+        public LunchMenu(RestaurantBase restaurant) :
+            this(
+                restaurant?.Id,
+                restaurant?.Name,
+                restaurant?.Url,
+                restaurant?.Web,
+                new List<DailyMenu>(),
+                restaurant?.Location,
+                restaurant?.DistanceFromOffice ?? 0,
+                restaurant?.City)
         {
         }
 
@@ -34,7 +49,7 @@ namespace LunchTime.Models
 
         public GeoCoordinate Location { get; set; }
 
-        public City City { get; set; }
+        public City? City { get; set; }
 
         public double DistanceFromOffice { get; set; }
 
@@ -51,8 +66,8 @@ namespace LunchTime.Models
         public DateTime Date { get; private set; }
 
         public List<Soup> Soups { get; set; }
-        
-        public List<Meal> Meals { get; set; } 
+
+        public List<Meal> Meals { get; set; }
     }
 
     public class Soup
@@ -87,9 +102,9 @@ namespace LunchTime.Models
 
     public class LunchMenus
     {
-        public IList<PersonalizedLunchMenu> Menus { get; set; }
+        public IQueryable<PersonalizedLunchMenu> Menus { get; set; }
 
-        public IList<SelectListItem> Cities { get; set; }
+        public IEnumerable<string> Cities { get; set; }
 
         public City? SelectedCity { get; set; }
     }

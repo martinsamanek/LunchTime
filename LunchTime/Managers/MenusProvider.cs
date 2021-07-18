@@ -3,15 +3,20 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using log4net;
 using LunchTime.Interfaces;
 using LunchTime.Models;
+using LunchTime.Restaurants;
 using LunchTime.Shared;
+using Microsoft.Extensions.Logging;
 
-namespace LunchTime.Restaurants
+namespace LunchTime.Managers
 {
     public class MenusProvider : IMenusProvider
     {
-        /* 
+        private static readonly ILog _log = LogManager.GetLogger(typeof(MenusProvider));
+
+        /*
         // Not needed loaded automatically with reflection see CreateMenus method.
         private static readonly List<RestaurantBase> Restaurants = new List<RestaurantBase>
         {
@@ -62,17 +67,26 @@ namespace LunchTime.Restaurants
             {
                 menus.Add(restaurant.Get());
             }
+            catch (NotImplementedException e)
+            {
+                _log.Info(e);
+            }
             catch (Exception e)
             {
-                menus.Add(new LunchMenu(restaurant.Id, restaurant.Name, restaurant.Url, restaurant.Web, restaurant.Location, restaurant.DistanceFromOffice, restaurant.City));
-                Console.WriteLine(e);
+                menus.Add(new LunchMenu(restaurant));
+                _log.Error($"Error while getting menus for restaurant {restaurant.Id}", e);
             }
         }
 
-        public IList<LunchMenu> GetMenus()
+        public IQueryable<LunchMenu> GetMenus()
         {
             Refresh();
-            return _menusCache;
+            return _menusCache.AsQueryable();
+        }
+
+        public bool IsLoaded()
+        {
+            return _lastRefreshDate == DateTime.Today && _menusCache?.Count > 0;
         }
 
         private void Refresh()
