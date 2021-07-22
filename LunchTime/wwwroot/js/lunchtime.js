@@ -61,7 +61,7 @@ function cityChanged() {
     window.location.reload(true);
 }
 
-function loadData() {
+function loadData(retry) {
     const xhr = $.ajax({
         cache: false,
         type: 'GET',
@@ -72,8 +72,10 @@ function loadData() {
             console.log('isLoaded header', isLoaded);
             if (isLoaded === 'True' || isLoaded === 'true' ) {
                 $('#main').html(html);
+            } else if (retry <= 100) {
+                setTimeout(() => loadData(++retry), 200);
             } else {
-                setTimeout(() => loadData(), 200);
+                console.error('Unable to load menu data')
             }
         }
     });
