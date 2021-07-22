@@ -6,13 +6,19 @@ using System.Net;
 using log4net;
 using LunchTime.Interfaces;
 using LunchTime.Models;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace LunchTime.Managers
 {
     public class LunchProvider : ILunchProvider
     {
-        private static readonly ILog _log = LogManager.GetLogger(typeof(MenusProvider));
+        private static ILogger _log;
+
+        public LunchProvider(ILogger<LunchProvider> log)
+        {
+            _log = log;
+        }
 
         public IEnumerable<string> GetBookmarkedIds(string bookmarkedValue)
         {
@@ -28,7 +34,7 @@ namespace LunchTime.Managers
             }
             catch (Exception e)
             {
-                _log.Error($"Error getting bookmarked menus from value '{bookmarkedValue}'", e);
+                _log.LogError($"Error getting bookmarked menus from value '{bookmarkedValue}'", e);
                 return new List<string>();
             }
         }

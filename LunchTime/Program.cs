@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace LunchTime
 {
@@ -12,6 +13,12 @@ namespace LunchTime
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureLogging(builder =>
+                {
+                    System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+                    builder.SetMinimumLevel(LogLevel.Trace);
+                    builder.AddLog4Net("log4net.config");
+                })
                 .UseStartup<Startup>();
     }
 }
