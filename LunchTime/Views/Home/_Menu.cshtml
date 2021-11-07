@@ -3,40 +3,45 @@
 @model PersonalizedLunchMenu
 
 <h2>
-    <a href="@Model.Menu.Url" target="_blank">@Model.Menu.RestaurantName</a>
-    @{
-        if (!string.IsNullOrEmpty(Model.Menu.Web))
-        {
-            <a href="@Model.Menu.Web" target="_blank"> (web)</a>
-        }
-    }
-    <a href="@MapUrlHelper.GetUrl(Model.Menu.Location)" target="_blank">
-        <img src="~/Images/map_marker.svg" alt="Map marker" title="@(Model.Menu.DistanceFromOffice) meters away" class="map-marker">
-    </a>
-    <a class="js-bookmark bookmark-link @(Model.Bookmarked ? "bookmarked" : "")" data-id="@Model.Menu.Id"></a>
+	<a href="@Model.Menu.Url" target="_blank">@Model.Menu.RestaurantName</a>
+	@{
+		if (!string.IsNullOrEmpty(Model.Menu.Web))
+		{
+			<a href="@Model.Menu.Web" target="_blank"> (web)</a>
+		}
+	}
+	<a href="@MapUrlHelper.GetUrl(Model.Menu.Location)" target="_blank">
+		<img src="~/Images/map_marker.svg" alt="Map marker" title="@(Model.Menu.DistanceFromOffice) meters away" class="map-marker">
+	</a>
+	<a class="js-bookmark bookmark-link @(Model.Bookmarked ? "bookmarked" : "")" data-id="@Model.Menu.Id"></a>
 </h2>
 @{
-    var menu = Model.Menu.DailyMenus.OrderBy(x => x.Date).FirstOrDefault(m => m.Date.Date >= DateTime.Now.Date);
-    if (menu != null)
-    {
-        <h4>@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(menu.Date.DayOfWeek) (@menu.Date.ToShortDateString())</h4>
-        <table class="table table-hover">
-            <tbody>
-            @foreach (var soup in menu.Soups)
-            {
-                <tr>
-                    <td>@soup.Name.Replace("&nbsp;", " ").Replace("&amp;", "&")</td>
-                    <td class="col-md-2"></td>
-                </tr>
-            }
-            @foreach (var meal in menu.Meals)
-            {
-                <tr>
-                    <td>@meal.Name.Replace("&nbsp;", " ").Replace("&amp;", "&")</td>
-                    <td class="col-md-2">@meal.Price</td>
-                </tr>
-            }
-            </tbody>
-        </table>
-    }
+	var menu = Model.Menu.DailyMenus.OrderBy(x => x.Date).FirstOrDefault(m => m.Date.Date >= DateTime.Now.Date);
+	if (menu != null)
+	{
+		<h4>@CultureInfo.CurrentUICulture.DateTimeFormat.GetDayName(menu.Date.DayOfWeek) (@menu.Date.ToShortDateString())</h4>
+		<table class="table table-hover">
+			<tbody>
+				@foreach (var soup in menu.Soups)
+				{
+					<tr>
+						<td>@soup.Name.Replace("&nbsp;", " ").Replace("&amp;", "&")</td>
+						<td class="col-md-2"></td>
+					</tr>
+				}
+				@foreach (var meal in menu.Meals)
+				{
+					<tr>
+						<td>@meal.Name.Replace("&nbsp;", " ").Replace("&amp;", "&")</td>
+						<td class="col-md-2">
+							@if (!String.IsNullOrEmpty(meal.Price))
+							{
+								@meal.Price
+							}
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	}
 }

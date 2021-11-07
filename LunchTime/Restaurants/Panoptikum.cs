@@ -22,7 +22,9 @@ namespace LunchTime.Restaurants
         public override LunchMenu Get()
         {
             var web = Fetch();
-            var menu = web.DocumentNode.SelectNodes("/html/body/div[1]/div[4]/div[1]/div[1]/table[1]/tbody")[0];
+            var nodes = web.DocumentNode.SelectNodes("/html/body/div[1]/div[4]/div[1]/div[1]/table[1]/tbody");
+            var menu = nodes[0];
+
             return Create(GetDailyMenus(menu));
         }
 
@@ -52,10 +54,10 @@ namespace LunchTime.Restaurants
             return items.Select(GetMeal).ToList();
         }
 
-        private static List<Soup> GetSoups(HtmlNode day)
+        private static List<Meal> GetSoups(HtmlNode day)
         {
-            var soup = new Soup(day.SelectNodes(".//td[4]")[0].InnerText);
-            return new List<Soup> { soup };
+            var soup = new Meal(day.SelectNodes(".//td[4]")[0].InnerText);
+            return new List<Meal> { soup };
         }
 
         private static Meal GetMeal(HtmlNode mealNode)

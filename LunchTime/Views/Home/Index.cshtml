@@ -13,6 +13,8 @@
             <select asp-for="@Model.SelectedCity" asp-items="@Model.Cities" class="city form-control">
                 <option>Vyberte město...</option>
             </select>
+            <input type="checkbox" asp-for="@Model.OnlyWithMenu" class="onlyWithMenu"/>
+            <label>Pouze restaurace s menu</label>
         </div>
     </form>
 </nav>
@@ -33,7 +35,9 @@
     <script src="~/js/lunchtime.js"></script>
     <script>
         $(document).ready(function () {
-            init(@SerializationHelper.JsSerializeHtml(Constants.BookmarkedCookieName), @SerializationHelper.JsSerializeHtml(Constants.SelectedCityCookieName));
+            init(@SerializationHelper.JsSerializeHtml(Constants.BookmarkedCookieName), 
+            @SerializationHelper.JsSerializeHtml(Constants.SelectedCityCookieName), 
+            @SerializationHelper.JsSerializeHtml(Constants.OnlyWithMenuCookieName));
         });
     </script>
 }

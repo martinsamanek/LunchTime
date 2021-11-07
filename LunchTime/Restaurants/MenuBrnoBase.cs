@@ -1,5 +1,7 @@
 ﻿using HtmlAgilityPack;
+
 using LunchTime.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +18,11 @@ namespace LunchTime.Restaurants
         public override LunchMenu Get()
         {
             var web = Fetch();
-            var menuContainer = web.DocumentNode.SelectNodes("//div[@itemscope][@itemtype=\"http://schema.org/Restaurant\"]")[0];
+            var nodes = web.DocumentNode.SelectNodes("//div[@itemscope][@itemtype=\"http://schema.org/Restaurant\"]");
+            var menuContainer = nodes[0];
             var tables = menuContainer.SelectNodes("//table").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains(" menu "));
             var menu = tables.Single();
+
             return Create(GetDailyMenus(menu));
         }
 
@@ -38,16 +42,16 @@ namespace LunchTime.Restaurants
             return dailyMenus;
         }
 
-        private List<Soup> GetSoups(HtmlNode day)
+        private List<Meal> GetSoups(HtmlNode day)
         {
-            var soups = new List<Soup>();
+            var soups = new List<Meal>();
 
             foreach (var soupLinePosition in SoupLinesPositions)
             {
-                var soup = new Soup(day.SelectNodes($".//tr[{soupLinePosition}]/td[1]")[0].InnerText);
+                var soup = new Meal(day.SelectNodes($".//tr[{soupLinePosition}]/td[1]")[0].InnerText);
                 soups.Add(soup);
             }
-            
+
             return soups;
         }
 
@@ -76,7 +80,7 @@ namespace LunchTime.Restaurants
 
             return meals;
         }
-        
+
         private static Meal GetMeal(HtmlNode mealNode)
         {
             var mealName = mealNode.SelectNodes(".//td[1]")[0].InnerText;

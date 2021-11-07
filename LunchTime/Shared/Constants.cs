@@ -11,5 +11,10 @@
         /// Cookie name used for storing selected city
         /// </summary>
         public const string SelectedCityCookieName = "selectedCity";
+
+        /// <summary>
+        /// Cookie name used for storing selected city
+        /// </summary>
+        public const string OnlyWithMenuCookieName = "onlyWithMenu";
     }
 }

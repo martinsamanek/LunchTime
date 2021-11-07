@@ -51,7 +51,7 @@ namespace LunchTime.Restaurants
                 );
 
             return menus
-                .OrderByDescending(x => x.DailyMenus.Count)
+                .OrderByDescending(x => x?.DailyMenus.Count)
                 .ThenBy(x => x.RestaurantName)
                 .ToList();
         }

@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
+
 using LunchTime.Models;
 using LunchTime.Restaurants;
 using LunchTime.Zomato.Model;
@@ -17,13 +19,13 @@ namespace LunchTime.Zomato
             return Create(response.DailyMenus.Select(s => new Models.DailyMenu(s.DailyMenu.StartDate.DateTime)
             {
                 Meals = MapMeals(s.DailyMenu.Dishes),
-                Soups = new List<Soup>()
+                Soups = new List<Meal>()
             }).ToList());
         }
 
         private List<Meal> MapMeals(List<DishElement> dailyMenuDishes)
         {
-            return dailyMenuDishes.Select(s => new Meal(s.Dish.Name, s.Dish.Price)).ToList();
+            return dailyMenuDishes.Select(s => new Meal(Regex.Replace(s.Dish.Name, @"^[0-9]\.", ""), s.Dish.Price)).ToList();
         }
     }
 }

@@ -50,24 +50,14 @@ namespace LunchTime.Models
 
         public DateTime Date { get; private set; }
 
-        public List<Soup> Soups { get; set; }
+        public List<Meal> Soups { get; set; }
         
         public List<Meal> Meals { get; set; } 
     }
 
-    public class Soup
-    {
-        public Soup(string name)
-        {
-            Name = name;
-        }
-
-        public string Name { get; private set; }
-    }
-
     public class Meal
     {
-        public Meal(string name, string price)
+        public Meal(string name, string price = "")
         {
             Name = name;
             Price = price;
@@ -92,5 +82,7 @@ namespace LunchTime.Models
         public IList<SelectListItem> Cities { get; set; }
 
         public City? SelectedCity { get; set; }
+
+        public bool OnlyWithMenu { get; set; }
     }
 }

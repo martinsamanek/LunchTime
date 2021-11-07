@@ -50,10 +50,10 @@ namespace LunchTime.Restaurants
             return meals;
         }
 
-        private static List<Soup> GetSoups(HtmlNode day)
+        private static List<Meal> GetSoups(HtmlNode day)
         {
-            var soup = new Soup(day.SelectNodes(".//tr[2]/td[2]")[0].InnerText);
-            return new List<Soup> { soup };
+            var soup = new Meal(day.SelectNodes(".//tr[2]/td[2]")[0].InnerText);
+            return new List<Meal> { soup };
         }
 
         private static Meal GetMeal(HtmlNode mealNode)

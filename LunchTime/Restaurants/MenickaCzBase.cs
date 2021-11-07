@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+
 using HtmlAgilityPack;
+
 using LunchTime.Models;
 
 namespace LunchTime.Restaurants
@@ -14,7 +16,7 @@ namespace LunchTime.Restaurants
         public override LunchMenu Get()
         {
             var web = Fetch();
-            
+
             var menuContainer = web.DocumentNode.SelectNodes("//div").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains("obsah"));
 
             var menu = menuContainer.Single();
@@ -31,8 +33,11 @@ namespace LunchTime.Restaurants
             {
                 var dailyMenu = new DailyMenu(DateTime.Now);
 
-                dailyMenu.Soups = GetSoups(days[i]);
-                dailyMenu.Meals = GetMeals(days[i]);
+                dailyMenu.Soups = GetMeals(days[i], "polevka");
+                dailyMenu.Meals = GetMeals(days[i], "jidlo");
+
+                if (dailyMenu.Soups.Count is 0 && dailyMenu.Meals.Count is 0)
+                    continue;
 
                 dailyMenus.Add(dailyMenu);
             }
@@ -40,28 +45,18 @@ namespace LunchTime.Restaurants
             return dailyMenus;
         }
 
-        private List<Soup> GetSoups(HtmlNode day)
-        {
-            var soups = new List<Soup>();
-            var soapsArray = day.ChildNodes["ul"].ChildNodes.Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains("polevka")).ToArray();
-
-            foreach (var soupLinePosition in soapsArray)
-            {
-                var soup = new Soup(day.SelectNodes("//li").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains("polevka")).First().InnerText);
-                soups.Add(soup);
-            }
-
-            return soups;
-        }
-
-        private List<Meal> GetMeals(HtmlNode day)
+        private List<Meal> GetMeals(HtmlNode day, string mealType)
         {
             var meals = new List<Meal>();
-            var mealsArray = day.ChildNodes["ul"].ChildNodes.Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains("jidlo")).ToArray();
+            var mealsArray = day.ChildNodes["ul"].ChildNodes.Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains(mealType)).ToArray();
 
             foreach (var mealNode in mealsArray)
             {
                 var meal = GetMeal(mealNode);
+
+                if (meal is null)
+                    continue;
+
                 meals.Add(meal);
             }
 
@@ -70,6 +65,9 @@ namespace LunchTime.Restaurants
 
         private static Meal GetMeal(HtmlNode mealNode)
         {
+            if (mealNode.ChildNodes.Count <= 1)
+                return null;
+
             var mealName = mealNode.ChildNodes[1].InnerText;
             var mealPrice = mealNode.ChildNodes[3].InnerText;
 

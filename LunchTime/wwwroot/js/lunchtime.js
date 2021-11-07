@@ -5,24 +5,28 @@ var DATA_ID = 'id',
     BOOKMARK_LINK_SELECTOR = '.js-bookmark',
     BOOKMARKED_CLASS = 'bookmarked',
     CITY_COOKIE_NAME,
-    CITY_SELECTOR = '.city';
+    ONLY_WITH_MENU_COOKIE_NAME,
+    CITY_SELECTOR = '.city',
+    ONLY_WITH_MENU_SWITCH = '.onlyWithMenu';
 
-function init(bookmarkCookieName, cityCookieName) {
+function init(bookmarkCookieName, cityCookieName, onlyWithMenuCookieName) {
     BOOKMARK_COOKIE_NAME = bookmarkCookieName;
     CITY_COOKIE_NAME = cityCookieName;
+    ONLY_WITH_MENU_COOKIE_NAME = onlyWithMenuCookieName;
     registerHandlers();
 }
 
 function registerHandlers() {
-    $(BOOKMARK_LINK_SELECTOR).on('click',function() {
+    $(BOOKMARK_LINK_SELECTOR).on('click', function () {
         var $link = $(this);
         var id = $link.data(DATA_ID);
         var bookmarked = addOrRemoveBookmarked(id);
 
         $link.toggleClass(BOOKMARKED_CLASS, bookmarked.includes(id));
-        setBookmarkCookie(bookmarked);        
+        setBookmarkCookie(bookmarked);
     });
     $(CITY_SELECTOR).on('change', cityChanged);
+    $(ONLY_WITH_MENU_SWITCH).on('change', onlyWithMenuChanged);
 }
 
 function addOrRemoveBookmarked(id) {
@@ -41,7 +45,7 @@ function setBookmarkCookie(bookmarkedArray) {
     if (bookmarkedArray.length === 0) {
         $.removeCookie(BOOKMARK_COOKIE_NAME);
         return;
-    }    
+    }
 
     $.cookie(BOOKMARK_COOKIE_NAME, JSON.stringify(bookmarkedArray), { expires: COOKIE_EXPIRATION_DAYS });
 }
@@ -58,5 +62,15 @@ function getBookmarkedArray() {
 function cityChanged() {
     var $citySelector = $(this);
     $.cookie(CITY_COOKIE_NAME, $citySelector.val(), { expires: COOKIE_EXPIRATION_DAYS });
+    reloadPage();
+}
+
+function onlyWithMenuChanged() {
+    var $onlyWithMenuSelector = $(this);
+    $.cookie(ONLY_WITH_MENU_COOKIE_NAME, $onlyWithMenuSelector.prop('checked'), { expires: COOKIE_EXPIRATION_DAYS });
+    reloadPage();
+}
+
+function reloadPage() {
     window.location.reload(true);
 }

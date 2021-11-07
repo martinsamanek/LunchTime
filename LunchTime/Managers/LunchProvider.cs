@@ -37,6 +37,22 @@ namespace LunchTime.Managers
             return result;
         }
 
+        public bool GetOnlyWithMenuValue()
+        {
+            var onlyWithMenuCookieValue = _httpContextAccessor.HttpContext.Request.Cookies[Constants.OnlyWithMenuCookieName];
+            if (string.IsNullOrEmpty(onlyWithMenuCookieValue))
+            {
+                return false;
+            }
+
+            if (!bool.TryParse(onlyWithMenuCookieValue, out var result))
+            {
+                return false;
+            }
+
+            return result;
+        }
+
         public IList<string> GetBookmarkedIds()
         {
             var bookmarkedCookieValue = _httpContextAccessor.HttpContext.Request.Cookies[Constants.BookmarkedCookieName];
@@ -60,6 +76,7 @@ namespace LunchTime.Managers
         public LunchMenus GetLunchMenus(IList<LunchMenu> menus)
         {
             var selectedCity = GetSelectedCity();
+            var onlyWithMenu = GetOnlyWithMenuValue();
             var cities = menus
                 .Select(x => x.City)
                 .Distinct()
@@ -74,7 +91,7 @@ namespace LunchTime.Managers
             var bookmarkedIds = GetBookmarkedIds();
             var personalizedMenus =
                 menus
-                    .Where(x => selectedCity.HasValue ? x.City == selectedCity.Value : true)
+                    .Where(x => ((onlyWithMenu && x.DailyMenus.Any(y => y.Date.Date == DateTime.Now.Date)) || !onlyWithMenu) && (selectedCity.HasValue ? x.City == selectedCity.Value : true))
                     .Select(x =>
                         new PersonalizedLunchMenu
                         {
@@ -87,7 +104,8 @@ namespace LunchTime.Managers
             {
                 Menus = personalizedMenus,
                 Cities = cities,
-                SelectedCity = selectedCity
+                SelectedCity = selectedCity,
+                OnlyWithMenu = onlyWithMenu
             };
         }
     }
