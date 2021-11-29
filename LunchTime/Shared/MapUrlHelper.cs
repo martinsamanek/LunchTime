@@ -1,6 +1,6 @@
 ﻿using GeoCoordinatePortable;
 
-namespace LunchTime.Helpers
+namespace LunchTime.Shared
 {
     public static class MapUrlHelper
     {

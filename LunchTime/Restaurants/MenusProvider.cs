@@ -6,23 +6,29 @@ using System.Threading;
 using System.Threading.Tasks;
 using LunchTime.Interfaces;
 using LunchTime.Models;
-using LunchTime.Shared;
 
 namespace LunchTime.Restaurants
 {
     public class MenusProvider : IMenusProvider
     {
+        private readonly IEnumerable<RestaurantBase> _restaurants;
+
         private DateTime _lastRefreshDate = DateTime.Today;
 
         private IList<LunchMenu> _menusCache;
 
         private readonly SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
 
+        public MenusProvider(IEnumerable<RestaurantBase> restaurants)
+        {
+            _restaurants = restaurants;
+        }
+
         private async Task<IList<LunchMenu>> CreateMenusAsync()
         {
             var menus = new ConcurrentBag<LunchMenu>();
 
-            var menuTasks = RestaurantsHelper.GetInstancesByBaseType<RestaurantBase>()
+            var menuTasks = _restaurants
                 .Select(restaurant => AddMenuAsync(menus, restaurant))
                 .ToList();
 

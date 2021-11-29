@@ -35,6 +35,7 @@ namespace LunchTime
 
             services.AddSingleton<IMenusProvider, MenusProvider>();
             services.AddSingleton<ILunchProvider, LunchProvider>();
+            services.RegisterByBaseType<RestaurantBase>();
 
             services.AddZomato(Configuration);
            
