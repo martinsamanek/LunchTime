@@ -1,0 +1,35 @@
+﻿@model VoteSessionModel
+
+@{
+    ViewBag.Title = "Hlasování";
+    Layout = "_Layout";
+}
+
+<h2>Hlasujte kam dnes na oběd</h2>
+
+<div>Odkaz na hlasování: </div>
+<div><input class="form-control" value="@Url.Action("Index", "Vote", new { votingId = Model.VotingSessionId }, Context.Request.Scheme)" disabled width="100"/></div>
+<br/>
+<div class="form-group">
+    @Html.HiddenFor(m => m.VotingSessionId)
+    <select asp-items="@Model.Restaurants" class="restaurant form-control" id="restaurantId" name="restaurantId">
+        <option>Vyberte restauraci</option>
+    </select>
+</div>
+<div class="form-group">
+    <input class="form-control" id="user" name="user" value="" placeholder="Jméno"/>
+</div>
+<div class="form-group">
+    <button class="form-control" id="voteButton" value="Vote">Hlasovat</button>
+</div>
+<div class="validation"></div>
+
+<div id="votes">
+    @{ await Html.RenderPartialAsync(
+           "Votes",
+           Model.VotesModel);
+    }
+</div>
+
+<script src="~/js/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/votingSession.js"></script>

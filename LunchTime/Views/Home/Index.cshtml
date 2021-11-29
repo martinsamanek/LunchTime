@@ -17,6 +17,8 @@
     </form>
 </nav>
 
+<a href="@Url.Action("Index", "Vote")">Vytvořit hlasování</a>
+
 @for (var c = 0; c < Model.Menus.Count; c = c + itemsPerColumn)
 {
     <div class="row">
