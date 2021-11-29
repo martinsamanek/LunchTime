@@ -1,7 +1,9 @@
-﻿namespace LunchTime.Zomato
+﻿using System.Threading.Tasks;
+
+namespace LunchTime.Zomato
 {
     public interface IZomatoClient
     {
-        ZomatoDailyMenu GetMenu(int restaurantId);
+        Task<ZomatoDailyMenu> GetMenuAsync(int restaurantId);
     }
 }

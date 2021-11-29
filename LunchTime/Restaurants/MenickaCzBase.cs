@@ -11,9 +11,9 @@ namespace LunchTime.Restaurants
 {
     public abstract class MenickaCzBase : RestaurantBase
     {
-        public override LunchMenu Get()
+        public override async Task<LunchMenu> GetAsync()
         {
-            var web = Fetch();
+            var web = await FetchAsync();
             
             var menuContainer = web.DocumentNode.SelectNodes("//div").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains("obsah"));
 
@@ -80,15 +80,13 @@ namespace LunchTime.Restaurants
             return meal;
         }
 
-        protected override HtmlDocument Fetch()
+        protected override async Task<HtmlDocument> FetchAsync()
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             var web = new HtmlWeb { AutoDetectEncoding = false, OverrideEncoding = Encoding.GetEncoding("windows-1250") };
 
-            var doc = web.Load(Url);
-
-            return doc;
+            return await web.LoadFromWebAsync(Url);
         }
     }
 }

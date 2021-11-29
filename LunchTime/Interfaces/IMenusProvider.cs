@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using LunchTime.Models;
 
 namespace LunchTime.Interfaces
 {
     public interface IMenusProvider
     {
-        IList<LunchMenu> GetMenus();
+        ValueTask<IList<LunchMenu>> GetMenusAsync();
     }
 }

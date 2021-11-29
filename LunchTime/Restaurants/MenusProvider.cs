@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using LunchTime.Interfaces;
 using LunchTime.Models;
@@ -11,44 +12,21 @@ namespace LunchTime.Restaurants
 {
     public class MenusProvider : IMenusProvider
     {
-        /* 
-        // Not needed loaded automatically with reflection see CreateMenus method.
-        private static readonly List<RestaurantBase> Restaurants = new List<RestaurantBase>
-        {
-            new Panoptikum(),
-            new NaKnofliku(),
-            new Freeland(),
-            new Jakoby(),
-            new Statl(),
-            new ZelenaKocka(),
-            new PivniOpice(),
-            new DrevenyOrel(),
-            new Leonessa(),
-            new Piazza(),
-            new Ratejna(),
-            new UKola(),
-            new UTrechCertu(),
-            new VeselaVacice(),
-            new ZlataMuska(),
-            new SaintPatrick(),
-            new Thalie(),
-        };
-        /**/
-
         private DateTime _lastRefreshDate = DateTime.Today;
 
         private IList<LunchMenu> _menusCache;
 
-        private readonly object _lock = new object();
+        private readonly SemaphoreSlim _lock = new SemaphoreSlim(1, 1);
 
-        private static IList<LunchMenu> CreateMenus()
+        private async Task<IList<LunchMenu>> CreateMenusAsync()
         {
             var menus = new ConcurrentBag<LunchMenu>();
 
-            Parallel.ForEach(
-                RestaurantsHelper.GetInstancesByBaseType<RestaurantBase>()
-                , restaurant => { AddMenu(menus, restaurant); }
-                );
+            var menuTasks = RestaurantsHelper.GetInstancesByBaseType<RestaurantBase>()
+                .Select(restaurant => AddMenuAsync(menus, restaurant))
+                .ToList();
+
+            await Task.WhenAll(menuTasks);
 
             return menus
                 .OrderByDescending(x => x.DailyMenus.Count)
@@ -56,11 +34,11 @@ namespace LunchTime.Restaurants
                 .ToList();
         }
 
-        private static void AddMenu(ConcurrentBag<LunchMenu> menus, RestaurantBase restaurant)
+        private static async Task AddMenuAsync(ConcurrentBag<LunchMenu> menus, RestaurantBase restaurant)
         {
             try
             {
-                menus.Add(restaurant.Get());
+                menus.Add(await restaurant.GetAsync());
             }
             catch (Exception e)
             {
@@ -69,22 +47,31 @@ namespace LunchTime.Restaurants
             }
         }
 
-        public IList<LunchMenu> GetMenus()
+        public async ValueTask<IList<LunchMenu>> GetMenusAsync()
         {
-            Refresh();
+            if (_lastRefreshDate != DateTime.Today || _menusCache == null)
+            {
+                await RefreshAsync();
+            }
+
             return _menusCache;
         }
 
-        private void Refresh()
+        private async Task RefreshAsync()
         {
-            lock (_lock)
+            await _lock.WaitAsync();
+
+            try
             {
-                if (_lastRefreshDate != DateTime.Today
-                    || _menusCache == null)
+                if (_lastRefreshDate != DateTime.Today || _menusCache == null)
                 {
                     _lastRefreshDate = DateTime.Today;
-                    _menusCache = CreateMenus();
+                    _menusCache = await CreateMenusAsync();
                 }
+            }
+            finally
+            {
+                _lock.Release();
             }
         }
     }

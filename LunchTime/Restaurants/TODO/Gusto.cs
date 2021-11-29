@@ -1,5 +1,6 @@
 ﻿using LunchTime.Models;
 using System;
+using System.Threading.Tasks;
 using GeoCoordinatePortable;
 
 namespace LunchTime.Restaurants.TODO
@@ -16,7 +17,7 @@ namespace LunchTime.Restaurants.TODO
 
         public override City City => City.Brno;
 
-        public override LunchMenu Get()
+        public override Task<LunchMenu> GetAsync()
         {
             throw new NotImplementedException();
         }

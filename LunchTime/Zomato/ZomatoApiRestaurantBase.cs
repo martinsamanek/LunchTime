@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using LunchTime.Models;
 using LunchTime.Restaurants;
 using LunchTime.Zomato.Model;
@@ -10,9 +11,9 @@ namespace LunchTime.Zomato
     {
         public abstract int ZomatoRestaurantId { get; }
 
-        public override LunchMenu Get()
+        public override async Task<LunchMenu> GetAsync()
         {
-            var response = ZomatoClientAccessor.Instance.GetMenu(ZomatoRestaurantId);
+            var response = await ZomatoClientAccessor.Instance.GetMenuAsync(ZomatoRestaurantId);
 
             return Create(response.DailyMenus.Select(s => new Models.DailyMenu(s.DailyMenu.StartDate.DateTime)
             {

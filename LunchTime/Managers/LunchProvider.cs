@@ -74,7 +74,7 @@ namespace LunchTime.Managers
             var bookmarkedIds = GetBookmarkedIds();
             var personalizedMenus =
                 menus
-                    .Where(x => selectedCity.HasValue ? x.City == selectedCity.Value : true)
+                    .Where(x => !selectedCity.HasValue || x.City == selectedCity.Value)
                     .Select(x =>
                         new PersonalizedLunchMenu
                         {
