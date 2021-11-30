@@ -9,17 +9,15 @@ namespace LunchTime.Shared
     {
         public static IServiceCollection RegisterByBaseType<T>(this IServiceCollection serviceCollection)
         {
-            var instances = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(
-                    t =>
-                        (t.BaseType == (typeof(T))
-                         || (t.BaseType != null && t.BaseType.BaseType == (typeof(T))))
-                        && t.GetConstructor(Type.EmptyTypes) != null)
-                .Select(t => (T)Activator.CreateInstance(t));
+            var types = Assembly
+                .GetExecutingAssembly()
+                .GetTypes()
+                .Where(t => typeof(T).IsAssignableFrom(t) && !t.IsAbstract && !t.IsInterface)
+                .Select(t => t);
 
-            foreach (var instance in instances)
+            foreach (var type in types)
             {
-                serviceCollection.AddSingleton(typeof(T), instance);
+                serviceCollection.AddSingleton(typeof(T), type);
             }
 
             return serviceCollection;
