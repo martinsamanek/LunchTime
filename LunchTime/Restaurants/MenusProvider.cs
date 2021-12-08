@@ -44,7 +44,8 @@ namespace LunchTime.Restaurants
         {
             try
             {
-                menus.Add(await restaurant.GetAsync());
+                if(menus != null)
+                    menus.Add(await restaurant.GetAsync());
             }
             catch (Exception e)
             {

@@ -22,21 +22,31 @@ namespace LunchTime.Restaurants
         public override async Task<LunchMenu> GetAsync()
         {
             var web = await FetchAsync();
-            var menu = web.DocumentNode.SelectNodes("//*[@id=\"post-141\"]/div/div/div/div/div")[0];
+            HtmlNode menu = null;
+            var nodeCollection = web.DocumentNode.SelectNodes("//*[@id=\"post-141\"]/div/div/div/div/div");
+            if (nodeCollection != null)
+            {
+                menu = nodeCollection[0];
+            }
+
             return Create(GetDailyMenus(menu));
         }
 
         private static List<DailyMenu> GetDailyMenus(HtmlNode menu)
         {
-            var days = menu.SelectNodes(".//tbody").ToArray();
             var dailyMenus = new List<DailyMenu>();
-            for (var i = 0; i < days.Length; i++)
+            if (menu != null)
             {
-                var dailyMenu = new DailyMenu(StartOfWeek().AddDays(i));
-                dailyMenu.Soups = GetSoups(days[i]);
-                dailyMenu.Meals = GetMeals(days[i]);
-                dailyMenus.Add(dailyMenu);
+                var days = menu.SelectNodes(".//tbody").ToArray();
+                for (var i = 0; i < days.Length; i++)
+                {
+                    var dailyMenu = new DailyMenu(StartOfWeek().AddDays(i));
+                    dailyMenu.Soups = GetSoups(days[i]);
+                    dailyMenu.Meals = GetMeals(days[i]);
+                    dailyMenus.Add(dailyMenu);
+                }
             }
+
             return dailyMenus;
         }
 

@@ -54,7 +54,6 @@ namespace LunchTime.Controllers
         [HttpPost]
         public async Task<IActionResult> Vote(string votingSessionId, string restaurantId, string user)
         {
-            //TODO prevent duplicate voting
             var session = _votingSessionManager.GetSession(votingSessionId);
 
             if (session == null)
@@ -62,9 +61,10 @@ namespace LunchTime.Controllers
                 return BadRequest("Expired or not existent session.");
             }
 
-            session.AddVote(user, restaurantId);
-
-            await _votingHubContext.Clients.All.SendAsync(Constants.SignalRVoteNotification, votingSessionId);
+            if (session.AddVote(user, restaurantId))
+            {
+                await _votingHubContext.Clients.All.SendAsync(Constants.SignalRVoteNotification, votingSessionId);
+            }
 
             return Ok();
         }
