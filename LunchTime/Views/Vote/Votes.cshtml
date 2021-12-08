@@ -1,0 +1,25 @@
+﻿@model VotesModel
+@{
+    if (Model.Votes == null)
+    {
+        <div>Hlasování vypršelo nebo neexistuje.</div>
+    }
+    else
+    {
+        var pollResults = Model.Votes.GroupBy(a => a.Restaurant).OrderByDescending(a => a.Count()).ToList();
+
+        <div class="vote-container horizontal rounded">
+            @foreach (var restaurant in pollResults)
+            {
+                <div class="bar horizontal">
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width: @((restaurant.Count() / (double)Model.Votes.Count * 100).ToString("0.00", System.Globalization.CultureInfo.InvariantCulture))%">
+                            <span >@restaurant.Key (<i>@(string.Join(", ", restaurant.Select(a => a.User)))</i>)</span>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    }
+}

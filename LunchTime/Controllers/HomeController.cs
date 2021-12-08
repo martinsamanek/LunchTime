@@ -1,4 +1,5 @@
-﻿using LunchTime.Interfaces;
+﻿using System.Threading.Tasks;
+using LunchTime.Interfaces;
 using LunchTime.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,15 +16,15 @@ namespace LunchTime.Controllers
             _lunchManager = lunchManager;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var model = GetModel();
+            var model = await GetModelAsync();
             return View(model);
         }
 
-        private LunchMenus GetModel()
+        private async Task<LunchMenus> GetModelAsync()
         {
-            var menus = _menusProvider.GetMenus();
+            var menus = await _menusProvider.GetMenusAsync();
             return _lunchManager.GetLunchMenus(menus);
         }
     }

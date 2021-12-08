@@ -3,6 +3,7 @@ using LunchTime.Models;
 using LunchTime.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using GeoCoordinatePortable;
 
 namespace LunchTime.Restaurants
@@ -25,14 +26,13 @@ namespace LunchTime.Restaurants
 
         public double DistanceFromOffice => LocationService.GetDistanceInMeters(Location, City);
 
-        public abstract LunchMenu Get();
+        public abstract Task<LunchMenu> GetAsync();
 
-        protected virtual HtmlDocument Fetch()
+        protected virtual async Task<HtmlDocument> FetchAsync()
         {
             var web = new HtmlWeb();
 
-            var doc = web.Load(Url);
-            return doc;
+            return await web.LoadFromWebAsync(Url);
         }
 
         protected LunchMenu Create(IList<DailyMenu> dailyMenus)

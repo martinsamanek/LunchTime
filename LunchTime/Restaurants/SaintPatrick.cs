@@ -3,6 +3,7 @@ using LunchTime.Models;
 using System.Collections.Generic;
 using GeoCoordinatePortable;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LunchTime.Restaurants
 {
@@ -18,9 +19,9 @@ namespace LunchTime.Restaurants
 
         public override City City => City.Brno;
 
-        public override LunchMenu Get()
+        public override async Task<LunchMenu> GetAsync()
         {
-            var web = Fetch();
+            var web = await FetchAsync();
             var menu = web.DocumentNode.SelectNodes("//*[@id=\"post-141\"]/div/div/div/div/div")[0];
             return Create(GetDailyMenus(menu));
         }

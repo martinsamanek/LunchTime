@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
 using LunchTime.Restaurants.TODO;
 using Microsoft.Extensions.Options;
@@ -22,7 +23,7 @@ namespace LunchTime.Zomato
             _options = options;
         }
 
-        public ZomatoDailyMenu GetMenu(int restaurantId)
+        public async Task<ZomatoDailyMenu> GetMenuAsync(int restaurantId)
         {
             var client = _httpClientFactory.CreateClient();
 
@@ -34,12 +35,11 @@ namespace LunchTime.Zomato
             client.DefaultRequestHeaders.Add(UserKeyRequestHeaderName, _options.CurrentValue.ApiKey);
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            var result = client.GetAsync(builder.ToString()).Result;
+            var result = await client.GetAsync(builder.ToString());
 
-            if (!result.IsSuccessStatusCode)
-                return null;
-
-            return JsonConvert.DeserializeObject<ZomatoDailyMenu>(result.Content.ReadAsStringAsync().Result);
+            return !result.IsSuccessStatusCode
+                ? null
+                : JsonConvert.DeserializeObject<ZomatoDailyMenu>(await result.Content.ReadAsStringAsync());
         }
     }
 }

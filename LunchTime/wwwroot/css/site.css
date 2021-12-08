@@ -66,15 +66,27 @@ textarea {
     max-width: 280px;
 }
 
+button,
+input[type="submit"]
+{
+    max-width: 150px;
+}
+
+.validation
+{
+    color: #b94a48;
+    margin-bottom: 10px;
+}
+
 .bookmark-link {
     width: 24px;
     height: 24px;
     content: url(/Images/star_white.png);
 }
 
-    .bookmark-link.bookmarked {
-        content: url(/Images/star_yellow.png);
-    }
+.bookmark-link.bookmarked {
+    content: url(/Images/star_yellow.png);
+}
 
 .map-marker {
     height: 20px;

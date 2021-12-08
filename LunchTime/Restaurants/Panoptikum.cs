@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using GeoCoordinatePortable;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace LunchTime.Restaurants
 {
@@ -19,9 +20,9 @@ namespace LunchTime.Restaurants
 
         public override City City => City.Brno;
 
-        public override LunchMenu Get()
+        public override async Task<LunchMenu> GetAsync()
         {
-            var web = Fetch();
+            var web = await FetchAsync();
             var menu = web.DocumentNode.SelectNodes("/html/body/div[1]/div[4]/div[1]/div[1]/table[1]/tbody")[0];
             return Create(GetDailyMenus(menu));
         }
@@ -65,12 +66,11 @@ namespace LunchTime.Restaurants
             return new Meal(name, price);
         }
 
-        protected override HtmlDocument Fetch()
+        protected override async Task<HtmlDocument> FetchAsync()
         {
             var web = new HtmlWeb { AutoDetectEncoding = false, OverrideEncoding = Encoding.GetEncoding("windows-1250") };
 
-            var doc = web.Load(Url);
-            return doc;
+            return await web.LoadFromWebAsync(Url);
         }
     }
 }

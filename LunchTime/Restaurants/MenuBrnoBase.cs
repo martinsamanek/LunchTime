@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace LunchTime.Restaurants
 {
@@ -13,9 +14,9 @@ namespace LunchTime.Restaurants
 
         protected abstract int FirstMealLinesPositions { get; }
 
-        public override LunchMenu Get()
+        public override async Task<LunchMenu> GetAsync()
         {
-            var web = Fetch();
+            var web = await FetchAsync();
             var menuContainer = web.DocumentNode.SelectNodes("//div[@itemscope][@itemtype=\"http://schema.org/Restaurant\"]")[0];
             var tables = menuContainer.SelectNodes("//table").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains(" menu "));
             var menu = tables.Single();
