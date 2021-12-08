@@ -11,9 +11,18 @@ namespace LunchTime.Models
         }
         public List<Vote> Votes { get; }
 
-        public void AddVote(string user, string restaurant)
+        public bool AddVote(string user, string restaurant)
         {
-            Votes.Add(new Vote(user, restaurant));
+            bool isVoteAdded = false;
+            var newVote = new Vote(user, restaurant);
+            if (!Votes.Exists(v => (v.Restaurant == newVote.Restaurant && v.User == newVote.User))) //avoid adding duplicate votes
+            {
+                Votes.Add(newVote);
+
+                isVoteAdded = true;
+            }
+
+            return isVoteAdded;
         }
     }
 }

@@ -27,12 +27,13 @@ namespace LunchTime.Restaurants
             var dailyMenus = new List<DailyMenu>();
             var days = menu.SelectNodes("//div").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains("menicka")).ToArray();
 
-            for (var i = 0; i < days.Length; i++)
+            foreach (var day in days)
             {
-                var dailyMenu = new DailyMenu(DateTime.Now);
-
-                dailyMenu.Soups = GetSoups(days[i]);
-                dailyMenu.Meals = GetMeals(days[i]);
+                var dailyMenu = new DailyMenu(DateTime.Now)
+                {
+                    Soups = GetSoups(day),
+                    Meals = GetMeals(day)
+                };
 
                 dailyMenus.Add(dailyMenu);
             }
@@ -47,7 +48,7 @@ namespace LunchTime.Restaurants
 
             foreach (var soupLinePosition in soapsArray)
             {
-                var soup = new Soup(day.SelectNodes("//li").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains("polevka")).First().InnerText);
+                var soup = new Soup(day.SelectNodes("//li").First(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains("polevka")).InnerText);
                 soups.Add(soup);
             }
 

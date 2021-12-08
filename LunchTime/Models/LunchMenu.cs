@@ -24,13 +24,13 @@ namespace LunchTime.Models
         {
         }
 
-        public string Id { get; private set; }
+        public string Id { get; }
 
-        public string RestaurantName { get; private set; }
+        public string RestaurantName { get; }
 
-        public string Url { get; private set; }
+        public string Url { get; }
 
-        public string Web { get; private set; }
+        public string Web { get; }
 
         public GeoCoordinate Location { get; set; }
 
@@ -48,7 +48,7 @@ namespace LunchTime.Models
             Date = date;
         }
 
-        public DateTime Date { get; private set; }
+        public DateTime Date { get; }
 
         public List<Soup> Soups { get; set; }
         
@@ -62,7 +62,7 @@ namespace LunchTime.Models
             Name = name;
         }
 
-        public string Name { get; private set; }
+        public string Name { get; }
     }
 
     public class Meal

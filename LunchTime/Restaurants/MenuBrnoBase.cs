@@ -17,23 +17,37 @@ namespace LunchTime.Restaurants
         public override async Task<LunchMenu> GetAsync()
         {
             var web = await FetchAsync();
-            var menuContainer = web.DocumentNode.SelectNodes("//div[@itemscope][@itemtype=\"http://schema.org/Restaurant\"]")[0];
-            var tables = menuContainer.SelectNodes("//table").Where(x => x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains(" menu "));
-            var menu = tables.Single();
+            HtmlNode menu = null;
+            var nodeCollection = web.DocumentNode.SelectNodes("//div[@itemscope][@itemtype=\"http://schema.org/Restaurant\"]");
+            if (nodeCollection != null)
+            {
+                var menuContainer = nodeCollection[0];
+                var tables = menuContainer.SelectNodes("//table").Where(x =>
+                    x.Attributes.Contains("class") && x.Attributes["class"].Value.Contains(" menu "));
+                menu = tables.Single();
+            }
+
             return Create(GetDailyMenus(menu));
         }
 
         private IList<DailyMenu> GetDailyMenus(HtmlNode menu)
         {
-            var days = menu.SelectNodes(".//tbody").ToArray();
             var dailyMenus = new List<DailyMenu>();
 
-            for (var i = 0; i < days.Length; i++)
+            if (menu != null)
             {
-                var dailyMenu = new DailyMenu(DateTime.Now);
-                dailyMenu.Soups = GetSoups(days[i]);
-                dailyMenu.Meals = GetMeals(days[i]);
-                dailyMenus.Add(dailyMenu);
+                var days = menu.SelectNodes(".//tbody").ToArray();
+
+                foreach (var day in days)
+                {
+                    var dailyMenu = new DailyMenu(DateTime.Now)
+                    {
+                        Soups = GetSoups(day),
+                        Meals = GetMeals(day)
+                    };
+
+                    dailyMenus.Add(dailyMenu);
+                }
             }
 
             return dailyMenus;
